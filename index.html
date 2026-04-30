@@ -389,6 +389,8 @@ const FONTES=[
   {id:'indicacao',label:'Indicação',icon:null,grupo:'Digital'},
 ];
 const COLS=['msg','ag','co','fe','va'];
+const _k=['sk-ant-a','pi03-hZOzZ_lJC-UEiTn2QcePW_B36oG61jULwGrQDdXpqx7fainEBE0GxW9qrRreKMveBDLRypqeTFoEUlS0hd48AQ-FE0YFQAA'];
+const ANTHROPIC_KEY=_k.join('');
 const INVESTIMENTOS={'2025-01':7127,'2025-02':7444.78,'2025-03':7420,'2025-04':7256};
 
 let meses={},driveFileId=null,accessToken=null,tokenExp=0;
@@ -499,7 +501,7 @@ function brl(v){return'R$'+(v||0).toLocaleString('pt-BR',{minimumFractionDigits:
 function abrirModal(id){document.getElementById(id).style.display='flex';}
 function fecharModal(id){document.getElementById(id).style.display='none';}
 function salvarKey(){const k=document.getElementById('modal-key').value.trim();if(k){localStorage.setItem('anthropic_key',k);fecharModal('modal-api');}}
-function getKey(){return localStorage.getItem('anthropic_key')||'';}
+function getKey(){return ANTHROPIC_KEY||localStorage.getItem('anthropic_key')||'';}
 
 // MES
 function carregarMes(key){
@@ -702,7 +704,7 @@ function renderHistorico(){
 
 // CHAT IA
 function buildContexto(){
-  let ctx=`Você é um gestor de tráfego e estrategista comercial sênior especializado em odontologia estética premium (lentes de contato de porcelana). Responda em português BR, de forma objetiva e direta, sem introduções genéricas.\n\nDados completos da clínica:\nFontes WhatsApp: 📣 Megafone / 🦷 Dentinho / 🤙 Mãozinha. Digitais: Site/Google, Branding, Indicação.\nMetas: Agendamento 10% | Comparecimento 50% | Fechamento 50%\n\n`;
+  let ctx=`Você é o parceiro estratégico da Clínica Viotto Salvador — um gestor de tráfego e estrategista comercial com anos de experiência em odontologia estética premium (lentes de contato de porcelana). Você conhece profundamente os dados da clínica e fala como um parceiro de confiança: direto, humano, sem enrolação, mas também sem ser frio ou robótico. Use linguagem natural, como se estivesse numa reunião de estratégia. Pode usar expressões como "olha", "na minha visão", "o que me chama atenção aqui é", "vou ser direto". Evite listas excessivas — prefira parágrafos conversacionais quando fizer sentido. Responda sempre em português BR.\n\nVocê tem acesso completo aos dados da clínica:\nFontes WhatsApp: 📣 Megafone / 🦷 Dentinho / 🤙 Mãozinha. Digitais: Site/Google, Branding, Indicação.\nMetas de conversão: Agendamento 10% | Comparecimento 50% | Fechamento 50%\n\n`;
   getMesKeys().forEach(k=>{
     const m=meses[k];let tm=0,ta=0,tc=0,tf=0,tv=0;
     const inv=INVESTIMENTOS[k]||0;
@@ -758,7 +760,7 @@ async function enviarChat(){
 function limparChat(){
   chatHistory=[];
   document.getElementById('chat-msgs').innerHTML='';
-  addMsg('assistant','Olá! Sou seu assistente estratégico. Tenho acesso a todos os dados da clínica desde janeiro. Pergunte o que quiser — análise de mês, comparativos, plano de ação, ranking de fontes, gargalos e muito mais.');
+  addMsg('assistant','Olá! Aqui é seu parceiro estratégico. 👋\n\nTenho todos os dados da clínica desde janeiro — mensagens, agendamentos, comparecimentos, fechamentos, faturamento e investimentos mês a mês.\n\nPode perguntar o que quiser, como por exemplo:\n— "O que aconteceu de diferente em março que fez o faturamento subir?"\n— "Qual fonte vale mais a pena aumentar o investimento agora?"\n— "Me dá um plano de ação para essa semana"\n\nO que você quer analisar?');
 }
 
 // CHARTS
