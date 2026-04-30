@@ -549,16 +549,133 @@ async function salvarDrive(){
   }
 }
 
-// ── INIT ABRIL ──
+// ── INIT DADOS ──
 function initAbril(){
-  const ABRIL=[
+  // JANEIRO
+  meses['2025-01']={clinica:'Clínica Viotto Salvador',mes:'2025-01',meta:'',semanas:[
+    {obs:'',fontes:{
+      anuncio:{msg:31,ag:1,co:0,fe:0,va:0,comp_det:''},
+      dentista:{msg:46,ag:5,co:1,fe:0,va:0,comp_det:''},
+      chave:{msg:47,ag:2,co:0,fe:0,va:0,comp_det:''},
+      site:{msg:9,ag:2,co:2,fe:0,va:0,comp_det:''},
+      branding:{msg:40,ag:6,co:5,fe:1,va:25800,comp_det:'Sandra Conceição entrada de 10k+ 10x no boleto de R$1580'},
+      indicacao:{msg:0,ag:0,co:0,fe:0,va:0,comp_det:''}}},
+    {obs:'',fontes:{
+      anuncio:{msg:0,ag:0,co:0,fe:0,va:0,comp_det:''},
+      dentista:{msg:48,ag:1,co:1,fe:0,va:0,comp_det:''},
+      chave:{msg:59,ag:1,co:1,fe:1,va:8100,comp_det:''},
+      site:{msg:10,ag:0,co:2,fe:1,va:1100,comp_det:'1 AV INDICAÇÃO'},
+      branding:{msg:31,ag:5,co:1,fe:0,va:0,comp_det:''},
+      indicacao:{msg:0,ag:0,co:0,fe:0,va:0,comp_det:''}}},
+    {obs:'',fontes:{
+      anuncio:{msg:0,ag:0,co:0,fe:0,va:0,comp_det:''},
+      dentista:{msg:45,ag:3,co:2,fe:1,va:7600,comp_det:''},
+      chave:{msg:53,ag:2,co:0,fe:0,va:0,comp_det:''},
+      site:{msg:24,ag:3,co:1,fe:0,va:0,comp_det:'2 AV INDICAÇÃO'},
+      branding:{msg:41,ag:4,co:0,fe:0,va:0,comp_det:'Senhora potencial, vai se organizar para iniciar'},
+      indicacao:{msg:0,ag:0,co:0,fe:0,va:0,comp_det:''}}},
+    {obs:'',fontes:{
+      anuncio:{msg:0,ag:0,co:0,fe:0,va:0,comp_det:''},
+      dentista:{msg:64,ag:3,co:1,fe:0,va:0,comp_det:''},
+      chave:{msg:40,ag:0,co:1,fe:0,va:0,comp_det:'COMPARECIMENTO POTENCIAL'},
+      site:{msg:18,ag:0,co:0,fe:0,va:0,comp_det:''},
+      branding:{msg:30,ag:4,co:0,fe:0,va:0,comp_det:''},
+      indicacao:{msg:0,ag:0,co:0,fe:0,va:0,comp_det:''}}},
+    {obs:'',fontes:{
+      anuncio:{msg:0,ag:0,co:0,fe:0,va:0,comp_det:''},
+      dentista:{msg:0,ag:0,co:0,fe:0,va:0,comp_det:''},
+      chave:{msg:0,ag:0,co:0,fe:0,va:0,comp_det:''},
+      site:{msg:0,ag:0,co:0,fe:0,va:0,comp_det:''},
+      branding:{msg:0,ag:0,co:0,fe:0,va:0,comp_det:''},
+      indicacao:{msg:0,ag:0,co:0,fe:0,va:0,comp_det:''}}}
+  ]};
+
+  // FEVEREIRO
+  meses['2025-02']={clinica:'Clínica Viotto Salvador',mes:'2025-02',meta:'',semanas:[
+    {obs:'',fontes:{
+      anuncio:{msg:0,ag:0,co:0,fe:0,va:0,comp_det:''},
+      dentista:{msg:74,ag:3,co:1,fe:0,va:0,comp_det:'Comparecimento potencial'},
+      chave:{msg:46,ag:0,co:1,fe:0,va:0,comp_det:'Comparecimento potencial'},
+      site:{msg:16,ag:5,co:1,fe:0,va:0,comp_det:''},
+      branding:{msg:46,ag:6,co:6,fe:1,va:30000,comp_det:'3 comparecimentos potencial'},
+      indicacao:{msg:0,ag:0,co:0,fe:0,va:0,comp_det:''}}},
+    {obs:'',fontes:{
+      anuncio:{msg:0,ag:0,co:0,fe:0,va:0,comp_det:''},
+      dentista:{msg:10,ag:2,co:0,fe:0,va:0,comp_det:''},
+      chave:{msg:10,ag:0,co:1,fe:0,va:0,comp_det:''},
+      site:{msg:9,ag:3,co:3,fe:3,va:1980,comp_det:'3 comparecimento potencial'},
+      branding:{msg:13,ag:0,co:0,fe:0,va:0,comp_det:''},
+      indicacao:{msg:0,ag:0,co:0,fe:0,va:0,comp_det:''}}},
+    {obs:'',fontes:{
+      anuncio:{msg:10,ag:0,co:0,fe:0,va:0,comp_det:''},
+      dentista:{msg:30,ag:3,co:1,fe:0,va:0,comp_det:''},
+      chave:{msg:33,ag:0,co:0,fe:0,va:0,comp_det:''},
+      site:{msg:7,ag:0,co:0,fe:0,va:0,comp_det:''},
+      branding:{msg:11,ag:3,co:1,fe:1,va:80000,comp_det:''},
+      indicacao:{msg:0,ag:0,co:0,fe:0,va:0,comp_det:''}}},
+    {obs:'',fontes:{
+      anuncio:{msg:16,ag:1,co:0,fe:0,va:0,comp_det:''},
+      dentista:{msg:75,ag:1,co:1,fe:1,va:1050,comp_det:'1 Comparecimento potencial'},
+      chave:{msg:23,ag:5,co:0,fe:0,va:0,comp_det:''},
+      site:{msg:11,ag:1,co:0,fe:0,va:0,comp_det:''},
+      branding:{msg:14,ag:6,co:5,fe:1,va:3000,comp_det:'1 comparecimento com potencial'},
+      indicacao:{msg:0,ag:0,co:0,fe:0,va:0,comp_det:''}}},
+    {obs:'',fontes:{
+      anuncio:{msg:0,ag:0,co:0,fe:0,va:0,comp_det:''},
+      dentista:{msg:0,ag:0,co:0,fe:0,va:0,comp_det:''},
+      chave:{msg:0,ag:0,co:0,fe:0,va:0,comp_det:''},
+      site:{msg:0,ag:0,co:0,fe:0,va:0,comp_det:''},
+      branding:{msg:0,ag:0,co:0,fe:0,va:0,comp_det:''},
+      indicacao:{msg:0,ag:0,co:0,fe:0,va:0,comp_det:''}}}
+  ]};
+
+  // MARÇO
+  meses['2025-03']={clinica:'Clínica Viotto Salvador',mes:'2025-03',meta:'',semanas:[
+    {obs:'',fontes:{
+      anuncio:{msg:14,ag:1,co:0,fe:0,va:0,comp_det:''},
+      dentista:{msg:91,ag:9,co:1,fe:0,va:0,comp_det:''},
+      chave:{msg:31,ag:2,co:1,fe:0,va:0,comp_det:''},
+      site:{msg:13,ag:1,co:2,fe:0,va:0,comp_det:''},
+      branding:{msg:17,ag:7,co:2,fe:0,va:0,comp_det:''},
+      indicacao:{msg:2,ag:2,co:1,fe:1,va:650,comp_det:''}}},
+    {obs:'',fontes:{
+      anuncio:{msg:0,ag:0,co:0,fe:0,va:0,comp_det:''},
+      dentista:{msg:31,ag:1,co:2,fe:0,va:0,comp_det:'1 EMILCON bom potencial já agendou retorno 2 MATEUS apenas levou o planejamento provavelmente não retorne (baixo finC)'},
+      chave:{msg:41,ag:3,co:0,fe:0,va:0,comp_det:''},
+      site:{msg:15,ag:2,co:4,fe:2,va:1000,comp_det:'1 ANA já iniciou o tratamento / 2 CRISTINA bom potencial indicou o marido (ela já começou) / 3 WAGNER apenas levou o planejamento lead morreu 4 Brenda retorno mensagem desparada, já começa dia 25'},
+      branding:{msg:11,ag:0,co:0,fe:0,va:0,comp_det:''},
+      indicacao:{msg:2,ag:1,co:2,fe:0,va:750,comp_det:'JORGE já está iniciando o tratamento 2 DANIEL bom potencial bom financeiro levou o planejamento e em breve vai agendar seu retorno'}}},
+    {obs:'',fontes:{
+      anuncio:{msg:0,ag:0,co:0,fe:0,va:0,comp_det:''},
+      dentista:{msg:53,ag:2,co:0,fe:0,va:0,comp_det:''},
+      chave:{msg:57,ag:3,co:2,fe:1,va:51200,comp_det:'RAMON: JOGADOR DE FUTEBOL JA PAGOU TODO O PLANEJAMENTO / SHIRLEY AGENDADA PARA EFETUAR O PAG. 24/03 LEAD COM TICKET ALTO'},
+      site:{msg:10,ag:0,co:4,fe:0,va:2200,comp_det:'SO PAGOU A LIMPEZA MAS JA AGENDOU O RETORNO PARA ESSA SEMANA. DEMAIS LEADS LEVOU O PLANEJAMENTO NAO TEM RETORNO'},
+      branding:{msg:18,ag:4,co:1,fe:1,va:8800,comp_det:'JA PAGOU TODO O PLANEJAMENTO'},
+      indicacao:{msg:0,ag:0,co:1,fe:0,va:0,comp_det:'ESPOSO DE PACIENTE VAI SO LEVOU O PLANEJAMENTO VAI ANALIZAR'}}},
+    {obs:'',fontes:{
+      anuncio:{msg:0,ag:0,co:0,fe:0,va:0,comp_det:''},
+      dentista:{msg:54,ag:2,co:2,fe:0,va:0,comp_det:'1 Lead sem perfil'},
+      chave:{msg:60,ag:1,co:0,fe:0,va:600,comp_det:'PAGOU APENAS MANUTENCAO DE LENTE (TALVEZ RALIZE A TROCA DAS LENTES)'},
+      site:{msg:7,ag:2,co:2,fe:2,va:6900,comp_det:'1 FEZ A AVALIAÇÃO, RETORNOU E JA PAGOU TODO O PLANEJAMENTO 5.750 / 2 JA PAGOU 1.150,00'},
+      branding:{msg:9,ag:3,co:1,fe:1,va:3000,comp_det:'2 PACIENTES QUE APENAS PAGOU A LIMPEZA E AGENDOU RETORNO PARA DEPOIS. DO FERIADO / 1 FOI ENCAMINHANDO O PLANEJAMENTO PERFIL BOM'},
+      indicacao:{msg:0,ag:0,co:1,fe:0,va:1900,comp_det:'ESPOSA QUE O MARIDO AGENDOU A AVALIAÇÃO JUNTO (FEZ AVALIAÇÃO SEMANA PASSADA)'}}},
+    {obs:'',fontes:{
+      anuncio:{msg:0,ag:0,co:0,fe:0,va:0,comp_det:''},
+      dentista:{msg:0,ag:0,co:0,fe:0,va:0,comp_det:''},
+      chave:{msg:0,ag:0,co:0,fe:0,va:0,comp_det:''},
+      site:{msg:0,ag:0,co:0,fe:0,va:0,comp_det:''},
+      branding:{msg:0,ag:0,co:0,fe:0,va:0,comp_det:''},
+      indicacao:{msg:0,ag:0,co:0,fe:0,va:0,comp_det:''}}}
+  ]};
+
+  // ABRIL
+  meses['2025-04']={clinica:'Clínica Viotto Salvador',mes:'2025-04',meta:'',semanas:[
     {obs:'',fontes:{anuncio:{msg:0,ag:0,co:0,fe:0,va:0,comp_det:''},dentista:{msg:17,ag:2,co:0,fe:0,va:0,comp_det:''},chave:{msg:48,ag:4,co:0,fe:0,va:0,comp_det:''},site:{msg:10,ag:1,co:1,fe:0,va:0,comp_det:'Lead potencial'},branding:{msg:17,ag:5,co:2,fe:0,va:0,comp_det:'Dois leads qualificados.'},indicacao:{msg:0,ag:0,co:0,fe:0,va:0,comp_det:''}}},
     {obs:'',fontes:{anuncio:{msg:0,ag:0,co:0,fe:0,va:0,comp_det:''},dentista:{msg:22,ag:0,co:0,fe:0,va:0,comp_det:''},chave:{msg:65,ag:6,co:3,fe:1,va:9300,comp_det:'1 retorno de avaliação deu entrada.'},site:{msg:13,ag:0,co:0,fe:0,va:0,comp_det:''},branding:{msg:14,ag:5,co:1,fe:1,va:700,comp_det:'Já realizou exo.'},indicacao:{msg:0,ag:0,co:0,fe:0,va:0,comp_det:''}}},
     {obs:'',fontes:{anuncio:{msg:0,ag:0,co:0,fe:0,va:0,comp_det:''},dentista:{msg:7,ag:1,co:1,fe:0,va:0,comp_det:'Bom perfil, retorna sábado.'},chave:{msg:71,ag:6,co:1,fe:0,va:0,comp_det:'Lead desqualificado.'},site:{msg:15,ag:4,co:4,fe:2,va:96900,comp_det:'Dois pagantes.'},branding:{msg:12,ag:4,co:2,fe:1,va:5000,comp_det:'Um pagou parte do planejamento.'},indicacao:{msg:0,ag:0,co:0,fe:0,va:0,comp_det:''}}},
     {obs:'',fontes:{anuncio:{msg:9,ag:0,co:0,fe:0,va:0,comp_det:''},dentista:{msg:0,ag:0,co:0,fe:0,va:0,comp_det:''},chave:{msg:67,ag:8,co:1,fe:0,va:0,comp_det:'Inicia em junho.'},site:{msg:10,ag:5,co:4,fe:0,va:0,comp_det:'Em acompanhamento.'},branding:{msg:5,ag:2,co:2,fe:2,va:11350,comp_det:'Já iniciaram tratamento.'},indicacao:{msg:0,ag:0,co:0,fe:0,va:0,comp_det:''}}},
-    {obs:'',fontes:{anuncio:{msg:0,ag:0,co:0,fe:0,va:0,comp_det:''},dentista:{msg:0,ag:0,co:0,fe:0,va:0,comp_det:''},chave:{msg:0,ag:0,co:0,fe:0,va:0,comp_det:''},site:{msg:0,ag:0,co:0,fe:0,va:0,comp_det:''},branding:{msg:0,ag:0,co:0,fe:0,va:0,comp_det:''},indicacao:{msg:0,ag:0,co:0,fe:0,va:0,comp_det:''}}},
-  ];
-  meses['2025-04']={clinica:'Clínica Viotto Salvador',mes:'2025-04',meta:'',semanas:ABRIL};
+    {obs:'',fontes:{anuncio:{msg:0,ag:0,co:0,fe:0,va:0,comp_det:''},dentista:{msg:0,ag:0,co:0,fe:0,va:0,comp_det:''},chave:{msg:0,ag:0,co:0,fe:0,va:0,comp_det:''},site:{msg:0,ag:0,co:0,fe:0,va:0,comp_det:''},branding:{msg:0,ag:0,co:0,fe:0,va:0,comp_det:''},indicacao:{msg:0,ag:0,co:0,fe:0,va:0,comp_det:''}}}
+  ]};
 }
 
 // ── HELPERS ──
