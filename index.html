@@ -216,8 +216,8 @@ main{position:relative;z-index:1}
   <div class="login-box">
     <div class="login-logo">VIOTTO</div>
     <div class="login-sub">Performance Comercial · Salvador</div>
-    <input class="login-input" id="login-pass" type="password" placeholder="Senha de acesso" onkeydown="if(event.key==='Enter')fazerLogin()"/>
-    <button class="login-btn" onclick="fazerLogin()">Entrar</button>
+    <input class="login-input" id="login-pass" type="password" placeholder="Senha de acesso"/>
+    <button class="login-btn" id="btn-login">Entrar</button>
     <div class="login-err" id="login-err"></div>
   </div>
 </div>
@@ -397,13 +397,18 @@ let dashMes='',chatHistory=[];
 
 // LOGIN
 function fazerLogin(){
-  const v=document.getElementById('login-pass').value;
-  if(v===SENHA){
-    document.getElementById('login-screen').style.display='none';
-    iniciar();
-  } else {
-    document.getElementById('login-err').textContent='Senha incorreta.';
-    document.getElementById('login-pass').value='';
+  try{
+    const v=document.getElementById('login-pass').value;
+    if(v.trim()===SENHA.trim()){
+      document.getElementById('login-screen').style.display='none';
+      iniciar();
+    } else {
+      document.getElementById('login-err').textContent='Senha incorreta. Tente novamente.';
+      document.getElementById('login-pass').value='';
+      document.getElementById('login-pass').focus();
+    }
+  }catch(e){
+    document.getElementById('login-err').textContent='Erro: '+e.message;
   }
 }
 
@@ -794,8 +799,17 @@ function initDados(){
 
 function iniciar(){
   sincronizar().then(()=>limparChat());
-  document.getElementById('chat-input').addEventListener('input',function(){this.style.height='38px';this.style.height=Math.min(this.scrollHeight,100)+'px';});
+  const ci=document.getElementById('chat-input');
+  if(ci) ci.addEventListener('input',function(){this.style.height='38px';this.style.height=Math.min(this.scrollHeight,100)+'px';});
 }
+
+// Bind eventos após DOM carregado
+document.addEventListener('DOMContentLoaded',function(){
+  const btnLogin=document.getElementById('btn-login');
+  const inputPass=document.getElementById('login-pass');
+  if(btnLogin) btnLogin.addEventListener('click',fazerLogin);
+  if(inputPass) inputPass.addEventListener('keydown',function(e){if(e.key==='Enter')fazerLogin();});
+});
 </script>
 </body>
 </html>
