@@ -12,6 +12,7 @@
   --black:#0A0A0A;--black-2:#111111;--black-3:#1A1A1A;
   --white:#FAFAF8;--white-dim:rgba(250,250,248,0.55);
   --gold-line:rgba(201,168,76,0.2);--font:'Montserrat',sans-serif;
+  --green:#6FCF97;
 }
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 body{background:var(--black);color:var(--white);font-family:var(--font);min-height:100vh;overflow-x:hidden}
@@ -79,6 +80,15 @@ main{position:relative;z-index:1}
 .btn-new-month{font-size:10px;font-weight:600;padding:5px 14px;border:1px dashed rgba(201,168,76,0.3);background:transparent;color:var(--gold-dim);cursor:pointer;transition:all .2s;border-radius:2px;font-family:var(--font)}
 .btn-new-month:hover{border-color:var(--gold);color:var(--gold-light)}
 
+/* TABS (semanas + resumo) */
+.tabs-row{display:flex;gap:0;margin-bottom:1.2rem;flex-wrap:wrap;border-bottom:1px solid var(--gold-line)}
+.tab-btn{font-family:var(--font);font-size:10px;font-weight:500;letter-spacing:0.1em;text-transform:uppercase;padding:8px 16px;border:none;border-bottom:2px solid transparent;background:transparent;color:rgba(250,250,248,0.3);cursor:pointer;transition:all .2s;margin-bottom:-1px}
+.tab-btn:hover{color:var(--white-dim)}
+.tab-btn.active{color:var(--gold-light);border-bottom-color:var(--gold);font-weight:700}
+.tab-btn.has-data{color:var(--white-dim)}
+.tab-btn.resumo-tab{color:var(--gold-dim);border-left:1px solid var(--gold-line);margin-left:8px}
+.tab-btn.resumo-tab.active{color:var(--gold-light)}
+
 /* META GRID */
 .meta-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:12px;margin-bottom:1.5rem}
 .field-wrap{display:flex;flex-direction:column;gap:6px}
@@ -86,13 +96,6 @@ main{position:relative;z-index:1}
 .field-wrap input{background:var(--black-3);border:1px solid var(--gold-line);color:var(--white);font-family:var(--font);font-size:12px;padding:10px 13px;outline:none;transition:border-color .2s;border-radius:0}
 .field-wrap input:focus{border-color:var(--gold)}
 .field-wrap input::placeholder{color:rgba(250,250,248,0.16)}
-
-/* WEEK SEL */
-.week-row{display:flex;gap:4px;margin-bottom:1.2rem;flex-wrap:wrap}
-.wk-btn{font-family:var(--font);font-size:10px;font-weight:500;letter-spacing:0.1em;text-transform:uppercase;padding:6px 15px;border:1px solid rgba(201,168,76,0.18);background:transparent;color:rgba(250,250,248,0.3);cursor:pointer;transition:all .2s;border-radius:2px}
-.wk-btn:hover{border-color:var(--gold-dim);color:var(--white-dim)}
-.wk-btn.active{background:var(--gold);border-color:var(--gold);color:var(--black);font-weight:700}
-.wk-btn.has-data{border-color:rgba(201,168,76,0.45);color:var(--white-dim)}
 
 /* ENTRY TABLE */
 .entry-card{border:1px solid var(--gold-line);background:var(--black-2);overflow:hidden;margin-bottom:1.2rem}
@@ -126,6 +129,25 @@ main{position:relative;z-index:1}
 .obs-wrap textarea:focus{border-color:var(--gold)}
 .obs-wrap textarea::placeholder{color:rgba(250,250,248,0.12)}
 
+/* RESUMO DO MÊS */
+.resumo-card{border:1px solid var(--gold-line);background:var(--black-2);overflow:hidden;margin-bottom:1.2rem}
+.resumo-thead{display:grid;grid-template-columns:1.4fr repeat(4,80px) 100px;padding:10px 18px;gap:4px;border-bottom:1px solid var(--gold-line);background:rgba(201,168,76,0.05)}
+.resumo-thead span{font-size:9px;font-weight:700;letter-spacing:0.16em;text-transform:uppercase;color:var(--gold-dim);text-align:right}
+.resumo-thead span:first-child{text-align:left}
+.resumo-row{display:grid;grid-template-columns:1.4fr repeat(4,80px) 100px;padding:6px 18px;gap:4px;align-items:center;border-bottom:1px solid rgba(201,168,76,0.05);transition:background .12s}
+.resumo-row:hover{background:rgba(201,168,76,0.03)}
+.resumo-row span{font-size:11px;font-weight:400;color:var(--white-dim);text-align:right}
+.resumo-row span:first-child{text-align:left;font-weight:500;color:var(--white)}
+.resumo-total{display:grid;grid-template-columns:1.4fr repeat(4,80px) 100px;padding:12px 18px;gap:4px;border-top:1px solid var(--gold-line);background:rgba(201,168,76,0.06)}
+.resumo-total span{font-size:12px;font-weight:700;color:var(--gold-light);text-align:right}
+.resumo-total span:first-child{text-align:left;color:var(--gold-dim);font-size:9px;letter-spacing:0.1em;text-transform:uppercase;align-self:center}
+.resumo-kpi{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:1px;border:1px solid var(--gold-line);margin-top:1px}
+.resumo-kpi-card{background:var(--black-2);padding:16px 18px;border-right:1px solid var(--gold-line)}
+.resumo-kpi-card:last-child{border-right:none}
+.resumo-kpi-label{font-size:9px;font-weight:700;letter-spacing:0.18em;text-transform:uppercase;color:var(--gold-dim);margin-bottom:8px}
+.resumo-kpi-val{font-size:22px;font-weight:200;color:var(--white);line-height:1}
+.resumo-kpi-sub{font-size:10px;color:var(--white-dim);margin-top:4px}
+
 /* ACTIONS */
 .action-row{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
 .btn-gold{font-family:var(--font);font-size:10px;font-weight:700;letter-spacing:0.18em;text-transform:uppercase;padding:12px 28px;border:none;cursor:pointer;background:var(--gold);color:var(--black);transition:all .2s;border-radius:2px}
@@ -134,6 +156,13 @@ main{position:relative;z-index:1}
 .btn-ghost:hover{border-color:var(--gold);color:var(--gold-light)}
 .btn-danger{font-family:var(--font);font-size:10px;font-weight:600;letter-spacing:0.14em;text-transform:uppercase;padding:12px 20px;border:1px solid rgba(220,60,60,0.25);cursor:pointer;background:transparent;color:rgba(220,60,60,0.5);transition:all .2s;border-radius:2px}
 .btn-danger:hover{border-color:rgba(220,60,60,0.6);color:rgba(220,60,60,0.9)}
+
+/* DASHBOARD MES SELECTOR */
+.dash-mes-bar{display:flex;gap:6px;align-items:center;margin-bottom:1.5rem;flex-wrap:wrap}
+.dash-mes-label{font-size:9px;font-weight:600;letter-spacing:0.2em;text-transform:uppercase;color:var(--gold-dim);margin-right:4px}
+.dash-mes-pill{font-size:10px;font-weight:500;padding:5px 14px;border:1px solid rgba(201,168,76,0.2);background:transparent;color:rgba(250,250,248,0.35);cursor:pointer;transition:all .2s;border-radius:2px;font-family:var(--font)}
+.dash-mes-pill:hover{border-color:var(--gold-dim);color:var(--white-dim)}
+.dash-mes-pill.active{background:var(--gold);border-color:var(--gold);color:var(--black);font-weight:700}
 
 /* KPI */
 .kpi-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:1px;margin-bottom:1.5rem;border:1px solid var(--gold-line)}
@@ -164,8 +193,7 @@ main{position:relative;z-index:1}
 .compare-row:last-child{border-bottom:none}
 .compare-key{font-size:10px;font-weight:500;color:var(--white-dim)}
 .compare-val{font-size:11px;font-weight:600;color:var(--white)}
-.compare-val.up{color:#6FCF97}
-.compare-val.down{color:#EB5757}
+.compare-val.green{color:var(--green)}
 
 /* AI */
 .ai-grid{display:grid;gap:1px;border:1px solid var(--gold-line);margin-bottom:1.5rem}
@@ -200,14 +228,13 @@ main{position:relative;z-index:1}
   .section{padding:1.2rem 1rem}
   .charts-grid,.compare-grid{grid-template-columns:1fr}
   .chart-cell.full{grid-column:1}
-  .entry-thead,.entry-row-data,.total-row{grid-template-columns:1fr repeat(3,64px) 80px}
-  .entry-thead span:nth-child(4),.entry-row-data input:nth-child(4),.total-row span:nth-child(4){display:none}
+  .entry-thead,.entry-row-data,.total-row,.resumo-thead,.resumo-row,.resumo-total{grid-template-columns:1fr repeat(3,64px) 80px}
+  .entry-thead span:nth-child(4),.entry-row-data input:nth-child(4),.total-row span:nth-child(4),.resumo-thead span:nth-child(4),.resumo-row span:nth-child(4),.resumo-total span:nth-child(4){display:none}
 }
 </style>
 </head>
 <body>
 
-<!-- LOGIN -->
 <div id="login-screen">
   <div class="login-box">
     <div class="login-logo">VIOTTO</div>
@@ -218,7 +245,6 @@ main{position:relative;z-index:1}
   </div>
 </div>
 
-<!-- MODAL API KEY -->
 <div class="modal-overlay" id="modal-api" style="display:none">
   <div class="modal-box">
     <div class="modal-title">Chave da API Claude</div>
@@ -231,7 +257,6 @@ main{position:relative;z-index:1}
   </div>
 </div>
 
-<!-- MODAL CONFIRM -->
 <div class="modal-overlay" id="modal-confirm" style="display:none">
   <div class="confirm-box">
     <div class="confirm-title">Excluir mês?</div>
@@ -251,57 +276,34 @@ main{position:relative;z-index:1}
     <button class="nav-btn" onclick="goTo('historico');renderHistorico()">Histórico</button>
     <button class="nav-btn" onclick="goTo('relatorio')">IA</button>
     <div class="nav-sep"></div>
-    <div class="drive-badge">
-      <span class="drive-dot" id="drive-dot"></span>
-      <span id="drive-label">Drive</span>
-    </div>
+    <div class="drive-badge"><span class="drive-dot" id="drive-dot"></span><span id="drive-label">Drive</span></div>
     <button class="nav-icon" onclick="abrirModal('modal-api')" title="API Key">⚙</button>
   </nav>
 </header>
 
 <main>
+  <!-- DADOS -->
   <div class="section active" id="s-dados">
     <div class="sec-head">
       <div class="sec-eyebrow">Entrada de dados</div>
       <div class="sec-title">Acompanhamento <strong>semanal</strong></div>
     </div>
-
     <div class="cloud-bar loading" id="cloud-bar">
       <span class="cb-icon">☁</span>
       <span class="cb-msg" id="cb-msg">Conectando ao Google Drive...</span>
     </div>
-
     <div class="month-bar">
       <span class="month-bar-label">Mês</span>
       <div id="month-pills" style="display:flex;gap:6px;flex-wrap:wrap"></div>
       <button class="btn-new-month" onclick="novoMes()">+ Novo mês</button>
     </div>
-
     <div class="meta-grid">
       <div class="field-wrap"><span class="field-label">Clínica</span><input id="f-clinica" type="text" placeholder="Nome da clínica"/></div>
       <div class="field-wrap"><span class="field-label">Mês de referência</span><input id="f-mes" type="month"/></div>
       <div class="field-wrap"><span class="field-label">Meta de faturamento R$</span><input id="f-meta" type="number" placeholder="Ex: 100000"/></div>
     </div>
-
-    <div class="week-row" id="wk-sel"></div>
-
-    <div class="entry-card">
-      <div class="entry-thead">
-        <span>Fonte</span><span>Msgs</span><span>Agend.</span><span>Comp.</span><span>Fech.</span><span>Valor R$</span>
-      </div>
-      <div id="entry-body"></div>
-      <div class="total-row">
-        <span>Total da semana</span>
-        <span id="t-msg">—</span><span id="t-ag">—</span><span id="t-co">—</span><span id="t-fe">—</span><span id="t-va">—</span>
-      </div>
-      <div class="comp-section-label">Detalhamento dos comparecimentos</div>
-      <div class="comp-detail-wrap" id="comp-detail-wrap"></div>
-      <div class="obs-wrap">
-        <span class="obs-label">Observações gerais da semana</span>
-        <textarea id="f-obs" placeholder="Contextos importantes, leads em andamento..."></textarea>
-      </div>
-    </div>
-
+    <div class="tabs-row" id="tabs-row"></div>
+    <div id="tab-content"></div>
     <div class="action-row">
       <button class="btn-gold" onclick="salvar();goTo('dashboard');renderDash()">Ver dashboard</button>
       <button class="btn-ghost" onclick="salvar();goTo('relatorio');gerarRelatorio()">Relatório IA ↗</button>
@@ -310,10 +312,15 @@ main{position:relative;z-index:1}
     </div>
   </div>
 
+  <!-- DASHBOARD -->
   <div class="section" id="s-dashboard">
     <div class="sec-head">
       <div class="sec-eyebrow">Visão geral</div>
       <div class="sec-title">Dashboard <strong>analítico</strong></div>
+    </div>
+    <div class="dash-mes-bar">
+      <span class="dash-mes-label">Mês</span>
+      <div id="dash-mes-pills" style="display:flex;gap:6px;flex-wrap:wrap"></div>
     </div>
     <div class="kpi-grid" id="kpi-grid"></div>
     <div class="charts-grid">
@@ -333,6 +340,7 @@ main{position:relative;z-index:1}
     </div>
   </div>
 
+  <!-- HISTÓRICO -->
   <div class="section" id="s-historico">
     <div class="sec-head">
       <div class="sec-eyebrow">Histórico mensal</div>
@@ -345,6 +353,7 @@ main{position:relative;z-index:1}
     </div>
   </div>
 
+  <!-- IA -->
   <div class="section" id="s-relatorio">
     <div class="sec-head">
       <div class="sec-eyebrow">Inteligência artificial</div>
@@ -362,14 +371,11 @@ main{position:relative;z-index:1}
 <div class="corner-dec"></div>
 
 <script>
-// ══════════════════════════════════════════
-//  CONFIGURAÇÕES
-// ══════════════════════════════════════════
-const SENHA = 'viottosalvador';
-const FOLDER_ID = '1H0XTFOjXo8JupBnPXZIg20BY9fehs5oC';
-const FILENAME = 'viotto_performance.json';
-const SERVICE_ACCOUNT = 'viotto-app@viotto-salvador-dashboard.iam.gserviceaccount.com';
-const PRIVATE_KEY = `-----BEGIN PRIVATE KEY-----
+const SENHA='viottosalvador';
+const FOLDER_ID='1H0XTFOjXo8JupBnPXZIg20BY9fehs5oC';
+const FILENAME='viotto_performance.json';
+const SERVICE_ACCOUNT='viotto-app@viotto-salvador-dashboard.iam.gserviceaccount.com';
+const PRIVATE_KEY=`-----BEGIN PRIVATE KEY-----
 MIIEvgIBADANBgkqhkiG9w0BAQEFAASCBKgwggSkAgEAAoIBAQC6g+esNRmcn8TZ
 RV31R3gSyyFvKiy3waqpZhGLuBtMI7mX2POSeKFIregoNNmC1384w9+53xSzn9OX
 9C2gkZmaQ4Aan3ogUs9hh40bs0GCrlR3jwjsXviUj6ivL7Rzhj2HIibzmgExNt3E
@@ -408,14 +414,17 @@ const FONTES=[
 ];
 const COLS=['msg','ag','co','fe','va'];
 
-// ── STATE ──
-let meses={}, driveFileId=null, accessToken=null, tokenExp=0;
-let curMes='', curSem=0, semData=makeSemData(), charts={};
+const INVESTIMENTOS={
+  '2025-01':7127,'2025-02':7444.78,'2025-03':7420,'2025-04':7256
+};
+
+let meses={},driveFileId=null,accessToken=null,tokenExp=0;
+let curMes='',curTab=0,semData=makeSemData(),charts={};
+let dashMes='';
 
 // ── LOGIN ──
 function fazerLogin(){
-  const v=document.getElementById('login-pass').value;
-  if(v===SENHA){
+  if(document.getElementById('login-pass').value===SENHA){
     document.getElementById('login-screen').style.display='none';
     iniciar();
   } else {
@@ -424,95 +433,55 @@ function fazerLogin(){
   }
 }
 
-// ── JWT / SERVICE ACCOUNT ──
+// ── JWT ──
 async function getAccessToken(){
   const now=Math.floor(Date.now()/1000);
-  if(accessToken && now < tokenExp-60) return accessToken;
-
-  // Build JWT
+  if(accessToken&&now<tokenExp-60) return accessToken;
   const header=b64url(JSON.stringify({alg:'RS256',typ:'JWT'}));
-  const claim=b64url(JSON.stringify({
-    iss:SERVICE_ACCOUNT,
-    scope:'https://www.googleapis.com/auth/drive',
-    aud:'https://oauth2.googleapis.com/token',
-    exp:now+3600, iat:now
-  }));
-  const sigInput=header+'.'+claim;
-  const key=await importPrivateKey(PRIVATE_KEY);
-  const sig=await signRS256(sigInput,key);
-  const jwt=sigInput+'.'+sig;
-
-  const res=await fetch('https://oauth2.googleapis.com/token',{
-    method:'POST',
-    headers:{'Content-Type':'application/x-www-form-urlencoded'},
-    body:`grant_type=urn%3Aietf%3Aparams%3Aoauth%3Agrant-type%3Ajwt-bearer&assertion=${jwt}`
-  });
+  const claim=b64url(JSON.stringify({iss:SERVICE_ACCOUNT,scope:'https://www.googleapis.com/auth/drive',aud:'https://oauth2.googleapis.com/token',exp:now+3600,iat:now}));
+  const sig=await signRS256(header+'.'+claim,await importPrivateKey(PRIVATE_KEY));
+  const jwt=header+'.'+claim+'.'+sig;
+  const res=await fetch('https://oauth2.googleapis.com/token',{method:'POST',headers:{'Content-Type':'application/x-www-form-urlencoded'},body:`grant_type=urn%3Aietf%3Aparams%3Aoauth%3Agrant-type%3Ajwt-bearer&assertion=${jwt}`});
   const d=await res.json();
-  if(!d.access_token) throw new Error('Falha ao obter token: '+JSON.stringify(d));
-  accessToken=d.access_token;
-  tokenExp=now+3600;
-  return accessToken;
+  if(!d.access_token) throw new Error('Token error: '+JSON.stringify(d));
+  accessToken=d.access_token; tokenExp=now+3600; return accessToken;
 }
+function b64url(s){ return btoa(unescape(encodeURIComponent(s))).replace(/\+/g,'-').replace(/\//g,'_').replace(/=+$/,''); }
+async function importPrivateKey(pem){ const der=Uint8Array.from(atob(pem.replace(/-----BEGIN PRIVATE KEY-----|-----END PRIVATE KEY-----|\n/g,'')),c=>c.charCodeAt(0)); return crypto.subtle.importKey('pkcs8',der,{name:'RSASSA-PKCS1-v1_5',hash:'SHA-256'},false,['sign']); }
+async function signRS256(input,key){ const sig=await crypto.subtle.sign('RSASSA-PKCS1-v1_5',key,new TextEncoder().encode(input)); return btoa(String.fromCharCode(...new Uint8Array(sig))).replace(/\+/g,'-').replace(/\//g,'_').replace(/=+$/,''); }
 
-function b64url(str){
-  return btoa(unescape(encodeURIComponent(str))).replace(/\+/g,'-').replace(/\//g,'_').replace(/=+$/,'');
-}
-
-async function importPrivateKey(pem){
-  const pemContent=pem.replace(/-----BEGIN PRIVATE KEY-----|-----END PRIVATE KEY-----|\n/g,'');
-  const der=Uint8Array.from(atob(pemContent),c=>c.charCodeAt(0));
-  return crypto.subtle.importKey('pkcs8',der,{name:'RSASSA-PKCS1-v1_5',hash:'SHA-256'},false,['sign']);
-}
-
-async function signRS256(input,key){
-  const enc=new TextEncoder();
-  const sig=await crypto.subtle.sign('RSASSA-PKCS1-v1_5',key,enc.encode(input));
-  return btoa(String.fromCharCode(...new Uint8Array(sig))).replace(/\+/g,'-').replace(/\//g,'_').replace(/=+$/,'');
-}
-
-// ── DRIVE API ──
+// ── DRIVE ──
 async function driveReq(method,url,body){
   const tok=await getAccessToken();
   const opts={method,headers:{Authorization:'Bearer '+tok}};
-  if(body){ opts.headers['Content-Type']='application/json'; opts.body=JSON.stringify(body); }
+  if(body){opts.headers['Content-Type']='application/json';opts.body=JSON.stringify(body);}
   const r=await fetch(url,opts);
-  if(!r.ok) throw new Error('Drive '+r.status+' '+await r.text());
+  if(!r.ok) throw new Error('Drive '+r.status);
   if(r.status===204) return {};
   return r.json();
 }
-
-async function buscarOuCriarArquivo(){
-  const tok=await getAccessToken();
+async function buscarOuCriar(){
   const q=encodeURIComponent(`name='${FILENAME}' and '${FOLDER_ID}' in parents and trashed=false`);
   const d=await driveReq('GET',`https://www.googleapis.com/drive/v3/files?q=${q}&fields=files(id)`);
-  if(d.files&&d.files.length){ driveFileId=d.files[0].id; return; }
+  if(d.files&&d.files.length){driveFileId=d.files[0].id;return;}
   const c=await driveReq('POST','https://www.googleapis.com/drive/v3/files',{name:FILENAME,mimeType:'application/json',parents:[FOLDER_ID]});
   driveFileId=c.id;
 }
-
 async function lerArquivo(){
   const tok=await getAccessToken();
   const r=await fetch(`https://www.googleapis.com/drive/v3/files/${driveFileId}?alt=media`,{headers:{Authorization:'Bearer '+tok}});
   if(!r.ok) return null;
-  const t=await r.text();
-  if(!t.trim()) return null;
-  try{ return JSON.parse(t); }catch(e){ return null; }
+  const t=await r.text(); if(!t.trim()) return null;
+  try{return JSON.parse(t);}catch(e){return null;}
 }
-
 async function gravarArquivo(data){
   const tok=await getAccessToken();
-  await fetch(`https://www.googleapis.com/upload/drive/v3/files/${driveFileId}?uploadType=media`,{
-    method:'PATCH',
-    headers:{Authorization:'Bearer '+tok,'Content-Type':'application/json'},
-    body:JSON.stringify(data)
-  });
+  await fetch(`https://www.googleapis.com/upload/drive/v3/files/${driveFileId}?uploadType=media`,{method:'PATCH',headers:{Authorization:'Bearer '+tok,'Content-Type':'application/json'},body:JSON.stringify(data)});
 }
 
-// ── SYNC ──
+// ── STATUS ──
 function setStatus(state,msg){
-  const bar=document.getElementById('cloud-bar');
-  const dot=document.getElementById('drive-dot');
-  const lbl=document.getElementById('drive-label');
+  const bar=document.getElementById('cloud-bar'),dot=document.getElementById('drive-dot'),lbl=document.getElementById('drive-label');
   bar.className='cloud-bar '+state;
   document.getElementById('cb-msg').textContent=msg;
   dot.className='drive-dot'+(state==='ok'?' ok':state==='err'?' err':' spin');
@@ -522,170 +491,36 @@ function setStatus(state,msg){
 async function sincronizar(){
   setStatus('loading','Conectando ao Google Drive...');
   try{
-    await buscarOuCriarArquivo();
+    await buscarOuCriar();
     const remote=await lerArquivo();
     if(remote&&remote.meses) meses={...remote.meses,...meses};
-    if(!getMesKeys().length) initAbril();
+    if(!getMesKeys().length) initDados();
     carregarMes(getMesKeys().at(-1));
-    const t=new Date().toLocaleTimeString('pt-BR',{hour:'2-digit',minute:'2-digit'});
-    setStatus('ok','Conectado ao Google Drive — '+t);
+    setStatus('ok','Conectado — '+new Date().toLocaleTimeString('pt-BR',{hour:'2-digit',minute:'2-digit'}));
   }catch(e){
-    console.error(e);
-    setStatus('err','Erro ao conectar: '+e.message.slice(0,60));
-    if(!getMesKeys().length) initAbril();
+    setStatus('err','Erro: '+e.message.slice(0,50));
+    if(!getMesKeys().length) initDados();
     carregarMes(getMesKeys().at(-1));
   }
 }
-
 async function salvarDrive(){
   setStatus('loading','Salvando...');
   try{
-    if(!driveFileId) await buscarOuCriarArquivo();
+    if(!driveFileId) await buscarOuCriar();
     await gravarArquivo({meses,updated:new Date().toISOString()});
-    const t=new Date().toLocaleTimeString('pt-BR',{hour:'2-digit',minute:'2-digit'});
-    setStatus('ok','Salvo no Google Drive — '+t);
-  }catch(e){
-    setStatus('err','Erro ao salvar: '+e.message.slice(0,50));
-  }
-}
-
-// ── INIT DADOS ──
-function initAbril(){
-  // JANEIRO
-  meses['2025-01']={clinica:'Clínica Viotto Salvador',mes:'2025-01',meta:'',semanas:[
-    {obs:'',fontes:{
-      anuncio:{msg:31,ag:1,co:0,fe:0,va:0,comp_det:''},
-      dentista:{msg:46,ag:5,co:1,fe:0,va:0,comp_det:''},
-      chave:{msg:47,ag:2,co:0,fe:0,va:0,comp_det:''},
-      site:{msg:9,ag:2,co:2,fe:0,va:0,comp_det:''},
-      branding:{msg:40,ag:6,co:5,fe:1,va:25800,comp_det:'Sandra Conceição entrada de 10k+ 10x no boleto de R$1580'},
-      indicacao:{msg:0,ag:0,co:0,fe:0,va:0,comp_det:''}}},
-    {obs:'',fontes:{
-      anuncio:{msg:0,ag:0,co:0,fe:0,va:0,comp_det:''},
-      dentista:{msg:48,ag:1,co:1,fe:0,va:0,comp_det:''},
-      chave:{msg:59,ag:1,co:1,fe:1,va:8100,comp_det:''},
-      site:{msg:10,ag:0,co:2,fe:1,va:1100,comp_det:'1 AV INDICAÇÃO'},
-      branding:{msg:31,ag:5,co:1,fe:0,va:0,comp_det:''},
-      indicacao:{msg:0,ag:0,co:0,fe:0,va:0,comp_det:''}}},
-    {obs:'',fontes:{
-      anuncio:{msg:0,ag:0,co:0,fe:0,va:0,comp_det:''},
-      dentista:{msg:45,ag:3,co:2,fe:1,va:7600,comp_det:''},
-      chave:{msg:53,ag:2,co:0,fe:0,va:0,comp_det:''},
-      site:{msg:24,ag:3,co:1,fe:0,va:0,comp_det:'2 AV INDICAÇÃO'},
-      branding:{msg:41,ag:4,co:0,fe:0,va:0,comp_det:'Senhora potencial, vai se organizar para iniciar'},
-      indicacao:{msg:0,ag:0,co:0,fe:0,va:0,comp_det:''}}},
-    {obs:'',fontes:{
-      anuncio:{msg:0,ag:0,co:0,fe:0,va:0,comp_det:''},
-      dentista:{msg:64,ag:3,co:1,fe:0,va:0,comp_det:''},
-      chave:{msg:40,ag:0,co:1,fe:0,va:0,comp_det:'COMPARECIMENTO POTENCIAL'},
-      site:{msg:18,ag:0,co:0,fe:0,va:0,comp_det:''},
-      branding:{msg:30,ag:4,co:0,fe:0,va:0,comp_det:''},
-      indicacao:{msg:0,ag:0,co:0,fe:0,va:0,comp_det:''}}},
-    {obs:'',fontes:{
-      anuncio:{msg:0,ag:0,co:0,fe:0,va:0,comp_det:''},
-      dentista:{msg:0,ag:0,co:0,fe:0,va:0,comp_det:''},
-      chave:{msg:0,ag:0,co:0,fe:0,va:0,comp_det:''},
-      site:{msg:0,ag:0,co:0,fe:0,va:0,comp_det:''},
-      branding:{msg:0,ag:0,co:0,fe:0,va:0,comp_det:''},
-      indicacao:{msg:0,ag:0,co:0,fe:0,va:0,comp_det:''}}}
-  ]};
-
-  // FEVEREIRO
-  meses['2025-02']={clinica:'Clínica Viotto Salvador',mes:'2025-02',meta:'',semanas:[
-    {obs:'',fontes:{
-      anuncio:{msg:0,ag:0,co:0,fe:0,va:0,comp_det:''},
-      dentista:{msg:74,ag:3,co:1,fe:0,va:0,comp_det:'Comparecimento potencial'},
-      chave:{msg:46,ag:0,co:1,fe:0,va:0,comp_det:'Comparecimento potencial'},
-      site:{msg:16,ag:5,co:1,fe:0,va:0,comp_det:''},
-      branding:{msg:46,ag:6,co:6,fe:1,va:30000,comp_det:'3 comparecimentos potencial'},
-      indicacao:{msg:0,ag:0,co:0,fe:0,va:0,comp_det:''}}},
-    {obs:'',fontes:{
-      anuncio:{msg:0,ag:0,co:0,fe:0,va:0,comp_det:''},
-      dentista:{msg:10,ag:2,co:0,fe:0,va:0,comp_det:''},
-      chave:{msg:10,ag:0,co:1,fe:0,va:0,comp_det:''},
-      site:{msg:9,ag:3,co:3,fe:3,va:1980,comp_det:'3 comparecimento potencial'},
-      branding:{msg:13,ag:0,co:0,fe:0,va:0,comp_det:''},
-      indicacao:{msg:0,ag:0,co:0,fe:0,va:0,comp_det:''}}},
-    {obs:'',fontes:{
-      anuncio:{msg:10,ag:0,co:0,fe:0,va:0,comp_det:''},
-      dentista:{msg:30,ag:3,co:1,fe:0,va:0,comp_det:''},
-      chave:{msg:33,ag:0,co:0,fe:0,va:0,comp_det:''},
-      site:{msg:7,ag:0,co:0,fe:0,va:0,comp_det:''},
-      branding:{msg:11,ag:3,co:1,fe:1,va:80000,comp_det:''},
-      indicacao:{msg:0,ag:0,co:0,fe:0,va:0,comp_det:''}}},
-    {obs:'',fontes:{
-      anuncio:{msg:16,ag:1,co:0,fe:0,va:0,comp_det:''},
-      dentista:{msg:75,ag:1,co:1,fe:1,va:1050,comp_det:'1 Comparecimento potencial'},
-      chave:{msg:23,ag:5,co:0,fe:0,va:0,comp_det:''},
-      site:{msg:11,ag:1,co:0,fe:0,va:0,comp_det:''},
-      branding:{msg:14,ag:6,co:5,fe:1,va:3000,comp_det:'1 comparecimento com potencial'},
-      indicacao:{msg:0,ag:0,co:0,fe:0,va:0,comp_det:''}}},
-    {obs:'',fontes:{
-      anuncio:{msg:0,ag:0,co:0,fe:0,va:0,comp_det:''},
-      dentista:{msg:0,ag:0,co:0,fe:0,va:0,comp_det:''},
-      chave:{msg:0,ag:0,co:0,fe:0,va:0,comp_det:''},
-      site:{msg:0,ag:0,co:0,fe:0,va:0,comp_det:''},
-      branding:{msg:0,ag:0,co:0,fe:0,va:0,comp_det:''},
-      indicacao:{msg:0,ag:0,co:0,fe:0,va:0,comp_det:''}}}
-  ]};
-
-  // MARÇO
-  meses['2025-03']={clinica:'Clínica Viotto Salvador',mes:'2025-03',meta:'',semanas:[
-    {obs:'',fontes:{
-      anuncio:{msg:14,ag:1,co:0,fe:0,va:0,comp_det:''},
-      dentista:{msg:91,ag:9,co:1,fe:0,va:0,comp_det:''},
-      chave:{msg:31,ag:2,co:1,fe:0,va:0,comp_det:''},
-      site:{msg:13,ag:1,co:2,fe:0,va:0,comp_det:''},
-      branding:{msg:17,ag:7,co:2,fe:0,va:0,comp_det:''},
-      indicacao:{msg:2,ag:2,co:1,fe:1,va:650,comp_det:''}}},
-    {obs:'',fontes:{
-      anuncio:{msg:0,ag:0,co:0,fe:0,va:0,comp_det:''},
-      dentista:{msg:31,ag:1,co:2,fe:0,va:0,comp_det:'1 EMILCON bom potencial já agendou retorno 2 MATEUS apenas levou o planejamento provavelmente não retorne (baixo finC)'},
-      chave:{msg:41,ag:3,co:0,fe:0,va:0,comp_det:''},
-      site:{msg:15,ag:2,co:4,fe:2,va:1000,comp_det:'1 ANA já iniciou o tratamento / 2 CRISTINA bom potencial indicou o marido (ela já começou) / 3 WAGNER apenas levou o planejamento lead morreu 4 Brenda retorno mensagem desparada, já começa dia 25'},
-      branding:{msg:11,ag:0,co:0,fe:0,va:0,comp_det:''},
-      indicacao:{msg:2,ag:1,co:2,fe:0,va:750,comp_det:'JORGE já está iniciando o tratamento 2 DANIEL bom potencial bom financeiro levou o planejamento e em breve vai agendar seu retorno'}}},
-    {obs:'',fontes:{
-      anuncio:{msg:0,ag:0,co:0,fe:0,va:0,comp_det:''},
-      dentista:{msg:53,ag:2,co:0,fe:0,va:0,comp_det:''},
-      chave:{msg:57,ag:3,co:2,fe:1,va:51200,comp_det:'RAMON: JOGADOR DE FUTEBOL JA PAGOU TODO O PLANEJAMENTO / SHIRLEY AGENDADA PARA EFETUAR O PAG. 24/03 LEAD COM TICKET ALTO'},
-      site:{msg:10,ag:0,co:4,fe:0,va:2200,comp_det:'SO PAGOU A LIMPEZA MAS JA AGENDOU O RETORNO PARA ESSA SEMANA. DEMAIS LEADS LEVOU O PLANEJAMENTO NAO TEM RETORNO'},
-      branding:{msg:18,ag:4,co:1,fe:1,va:8800,comp_det:'JA PAGOU TODO O PLANEJAMENTO'},
-      indicacao:{msg:0,ag:0,co:1,fe:0,va:0,comp_det:'ESPOSO DE PACIENTE VAI SO LEVOU O PLANEJAMENTO VAI ANALIZAR'}}},
-    {obs:'',fontes:{
-      anuncio:{msg:0,ag:0,co:0,fe:0,va:0,comp_det:''},
-      dentista:{msg:54,ag:2,co:2,fe:0,va:0,comp_det:'1 Lead sem perfil'},
-      chave:{msg:60,ag:1,co:0,fe:0,va:600,comp_det:'PAGOU APENAS MANUTENCAO DE LENTE (TALVEZ RALIZE A TROCA DAS LENTES)'},
-      site:{msg:7,ag:2,co:2,fe:2,va:6900,comp_det:'1 FEZ A AVALIAÇÃO, RETORNOU E JA PAGOU TODO O PLANEJAMENTO 5.750 / 2 JA PAGOU 1.150,00'},
-      branding:{msg:9,ag:3,co:1,fe:1,va:3000,comp_det:'2 PACIENTES QUE APENAS PAGOU A LIMPEZA E AGENDOU RETORNO PARA DEPOIS. DO FERIADO / 1 FOI ENCAMINHANDO O PLANEJAMENTO PERFIL BOM'},
-      indicacao:{msg:0,ag:0,co:1,fe:0,va:1900,comp_det:'ESPOSA QUE O MARIDO AGENDOU A AVALIAÇÃO JUNTO (FEZ AVALIAÇÃO SEMANA PASSADA)'}}},
-    {obs:'',fontes:{
-      anuncio:{msg:0,ag:0,co:0,fe:0,va:0,comp_det:''},
-      dentista:{msg:0,ag:0,co:0,fe:0,va:0,comp_det:''},
-      chave:{msg:0,ag:0,co:0,fe:0,va:0,comp_det:''},
-      site:{msg:0,ag:0,co:0,fe:0,va:0,comp_det:''},
-      branding:{msg:0,ag:0,co:0,fe:0,va:0,comp_det:''},
-      indicacao:{msg:0,ag:0,co:0,fe:0,va:0,comp_det:''}}}
-  ]};
-
-  // ABRIL
-  meses['2025-04']={clinica:'Clínica Viotto Salvador',mes:'2025-04',meta:'',semanas:[
-    {obs:'',fontes:{anuncio:{msg:0,ag:0,co:0,fe:0,va:0,comp_det:''},dentista:{msg:17,ag:2,co:0,fe:0,va:0,comp_det:''},chave:{msg:48,ag:4,co:0,fe:0,va:0,comp_det:''},site:{msg:10,ag:1,co:1,fe:0,va:0,comp_det:'Lead potencial'},branding:{msg:17,ag:5,co:2,fe:0,va:0,comp_det:'Dois leads qualificados.'},indicacao:{msg:0,ag:0,co:0,fe:0,va:0,comp_det:''}}},
-    {obs:'',fontes:{anuncio:{msg:0,ag:0,co:0,fe:0,va:0,comp_det:''},dentista:{msg:22,ag:0,co:0,fe:0,va:0,comp_det:''},chave:{msg:65,ag:6,co:3,fe:1,va:9300,comp_det:'1 retorno de avaliação deu entrada.'},site:{msg:13,ag:0,co:0,fe:0,va:0,comp_det:''},branding:{msg:14,ag:5,co:1,fe:1,va:700,comp_det:'Já realizou exo.'},indicacao:{msg:0,ag:0,co:0,fe:0,va:0,comp_det:''}}},
-    {obs:'',fontes:{anuncio:{msg:0,ag:0,co:0,fe:0,va:0,comp_det:''},dentista:{msg:7,ag:1,co:1,fe:0,va:0,comp_det:'Bom perfil, retorna sábado.'},chave:{msg:71,ag:6,co:1,fe:0,va:0,comp_det:'Lead desqualificado.'},site:{msg:15,ag:4,co:4,fe:2,va:96900,comp_det:'Dois pagantes.'},branding:{msg:12,ag:4,co:2,fe:1,va:5000,comp_det:'Um pagou parte do planejamento.'},indicacao:{msg:0,ag:0,co:0,fe:0,va:0,comp_det:''}}},
-    {obs:'',fontes:{anuncio:{msg:9,ag:0,co:0,fe:0,va:0,comp_det:''},dentista:{msg:0,ag:0,co:0,fe:0,va:0,comp_det:''},chave:{msg:67,ag:8,co:1,fe:0,va:0,comp_det:'Inicia em junho.'},site:{msg:10,ag:5,co:4,fe:0,va:0,comp_det:'Em acompanhamento.'},branding:{msg:5,ag:2,co:2,fe:2,va:11350,comp_det:'Já iniciaram tratamento.'},indicacao:{msg:0,ag:0,co:0,fe:0,va:0,comp_det:''}}},
-    {obs:'',fontes:{anuncio:{msg:0,ag:0,co:0,fe:0,va:0,comp_det:''},dentista:{msg:0,ag:0,co:0,fe:0,va:0,comp_det:''},chave:{msg:0,ag:0,co:0,fe:0,va:0,comp_det:''},site:{msg:0,ag:0,co:0,fe:0,va:0,comp_det:''},branding:{msg:0,ag:0,co:0,fe:0,va:0,comp_det:''},indicacao:{msg:0,ag:0,co:0,fe:0,va:0,comp_det:''}}}
-  ]};
+    setStatus('ok','Salvo — '+new Date().toLocaleTimeString('pt-BR',{hour:'2-digit',minute:'2-digit'}));
+  }catch(e){ setStatus('err','Erro ao salvar: '+e.message.slice(0,40)); }
 }
 
 // ── HELPERS ──
-function makeSemData(){ return Array.from({length:5},()=>{ const f={}; FONTES.forEach(({id})=>{f[id]={msg:0,ag:0,co:0,fe:0,va:0,comp_det:''}}); return {obs:'',fontes:f}; }); }
-function getMesKeys(){ return Object.keys(meses).sort(); }
-function formatMes(k){ const[y,m]=k.split('-'); return ['Jan','Fev','Mar','Abr','Mai','Jun','Jul','Ago','Set','Out','Nov','Dez'][+m-1]+' '+y; }
-function abrirModal(id){ document.getElementById(id).style.display='flex'; }
-function fecharModal(id){ document.getElementById(id).style.display='none'; }
-function salvarKey(){ const k=document.getElementById('modal-key').value.trim(); if(k){ localStorage.setItem('anthropic_key',k); fecharModal('modal-api'); } }
-function getKey(){ return localStorage.getItem('anthropic_key')||''; }
+function makeSemData(){return Array.from({length:5},()=>{const f={};FONTES.forEach(({id})=>{f[id]={msg:0,ag:0,co:0,fe:0,va:0,comp_det:''};});return{obs:'',fontes:f};});}
+function getMesKeys(){return Object.keys(meses).sort();}
+function formatMes(k){const[y,m]=k.split('-');return['Jan','Fev','Mar','Abr','Mai','Jun','Jul','Ago','Set','Out','Nov','Dez'][+m-1]+' '+y;}
+function abrirModal(id){document.getElementById(id).style.display='flex';}
+function fecharModal(id){document.getElementById(id).style.display='none';}
+function salvarKey(){const k=document.getElementById('modal-key').value.trim();if(k){localStorage.setItem('anthropic_key',k);fecharModal('modal-api');}}
+function getKey(){return localStorage.getItem('anthropic_key')||'';}
+function brl(v){return'R$'+(v||0).toLocaleString('pt-BR',{minimumFractionDigits:2,maximumFractionDigits:2});}
 
 // ── MES ──
 function carregarMes(key){
@@ -693,97 +528,154 @@ function carregarMes(key){
   curMes=key;
   const m=meses[key];
   semData=JSON.parse(JSON.stringify(m.semanas));
-  curSem=0;
+  curTab=0;
   document.getElementById('f-clinica').value=m.clinica||'';
   document.getElementById('f-mes').value=m.mes||key;
   document.getElementById('f-meta').value=m.meta||'';
-  buildWkSel(); loadCur(); renderMonthPills();
+  buildTabs(); renderTab(); renderMonthPills();
 }
 
 function novoMes(){
   salvarState();
   const d=new Date(); d.setMonth(d.getMonth()+1);
   let k=d.toISOString().slice(0,7);
-  while(meses[k]){ d.setMonth(d.getMonth()+1); k=d.toISOString().slice(0,7); }
+  while(meses[k]){d.setMonth(d.getMonth()+1);k=d.toISOString().slice(0,7);}
   meses[k]={clinica:document.getElementById('f-clinica').value||'',mes:k,meta:'',semanas:makeSemData()};
-  curMes=k; semData=makeSemData(); curSem=0;
+  curMes=k; semData=makeSemData(); curTab=0;
   document.getElementById('f-mes').value=k;
   document.getElementById('f-meta').value='';
-  buildWkSel(); loadCur(); renderMonthPills();
+  buildTabs(); renderTab(); renderMonthPills();
 }
 
 function confirmarExclusao(){
-  if(getMesKeys().length<=1){ alert('Não é possível excluir o único mês.'); return; }
+  if(getMesKeys().length<=1){alert('Não é possível excluir o único mês.');return;}
   document.getElementById('confirm-msg').textContent=`Excluir ${curMes}?`;
-  document.getElementById('confirm-ok').onclick=async()=>{ delete meses[curMes]; fecharModal('modal-confirm'); await salvar(); carregarMes(getMesKeys().at(-1)); };
+  document.getElementById('confirm-ok').onclick=async()=>{delete meses[curMes];fecharModal('modal-confirm');await salvar();carregarMes(getMesKeys().at(-1));};
   abrirModal('modal-confirm');
 }
 
 function renderMonthPills(){
-  const c=document.getElementById('month-pills'); c.innerHTML='';
-  getMesKeys().forEach(k=>{ const b=document.createElement('button'); b.className='month-pill'+(k===curMes?' active':' saved'); b.textContent=formatMes(k); b.onclick=()=>carregarMes(k); c.appendChild(b); });
+  const c=document.getElementById('month-pills');c.innerHTML='';
+  getMesKeys().forEach(k=>{const b=document.createElement('button');b.className='month-pill'+(k===curMes?' active':' saved');b.textContent=formatMes(k);b.onclick=()=>carregarMes(k);c.appendChild(b);});
+}
+
+// ── TABS ──
+function buildTabs(){
+  const row=document.getElementById('tabs-row');row.innerHTML='';
+  for(let i=0;i<5;i++){
+    const b=document.createElement('button');
+    b.className='tab-btn'+(i===curTab?' active':'');
+    const hasData=Object.values(semData[i].fontes).some(f=>f.msg>0);
+    if(hasData&&i!==curTab) b.classList.add('has-data');
+    b.textContent='Semana '+(i+1);
+    b.onclick=()=>{salvarState();curTab=i;buildTabs();renderTab();};
+    row.appendChild(b);
+  }
+  const r=document.createElement('button');
+  r.className='tab-btn resumo-tab'+(curTab===5?' active':'');
+  r.textContent='📊 Resumo do Mês';
+  r.onclick=()=>{salvarState();curTab=5;buildTabs();renderTab();};
+  row.appendChild(r);
+}
+
+function renderTab(){
+  const c=document.getElementById('tab-content');
+  if(curTab===5){renderResumo(c);return;}
+  // Semana entry
+  c.innerHTML='';
+  const card=document.createElement('div');card.className='entry-card';
+  card.innerHTML=`<div class="entry-thead"><span>Fonte</span><span>Msgs</span><span>Agend.</span><span>Comp.</span><span>Fech.</span><span>Valor R$</span></div><div id="entry-body"></div><div class="total-row"><span>Total da semana</span><span id="t-msg">—</span><span id="t-ag">—</span><span id="t-co">—</span><span id="t-fe">—</span><span id="t-va">—</span></div><div class="comp-section-label">Detalhamento dos comparecimentos</div><div class="comp-detail-wrap" id="comp-detail-wrap"></div><div class="obs-wrap"><span class="obs-label">Observações gerais da semana</span><textarea id="f-obs" placeholder="Contextos importantes, leads em andamento..."></textarea></div>`;
+  c.appendChild(card);
+  buildEntryBody();loadCur();
+}
+
+function renderResumo(c){
+  c.innerHTML='';
+  // Calcular totais por fonte
+  const totFonte={};
+  FONTES.forEach(f=>{totFonte[f.id]={msg:0,ag:0,co:0,fe:0,va:0};});
+  let tm=0,ta=0,tc=0,tf=0,tv=0;
+  semData.forEach(s=>{FONTES.forEach(f=>{const d=s.fontes[f.id];totFonte[f.id].msg+=d.msg;totFonte[f.id].ag+=d.ag;totFonte[f.id].co+=d.co;totFonte[f.id].fe+=d.fe;totFonte[f.id].va+=d.va;tm+=d.msg;ta+=d.ag;tc+=d.co;tf+=d.fe;tv+=d.va;});});
+  const inv=INVESTIMENTOS[curMes]||0;
+  const cpl=tm>0?(inv/tm).toFixed(2):null;
+
+  const card=document.createElement('div');card.className='resumo-card';
+  let rows='';
+  let lastG=null;
+  FONTES.forEach(f=>{
+    if(f.grupo!==lastG){rows+=`<div class="group-label">${f.grupo}</div>`;lastG=f.grupo;}
+    const d=totFonte[f.id];
+    const ic=f.icon?f.icon+' ':'';
+    rows+=`<div class="resumo-row"><span>${ic}${f.label}</span><span>${d.msg||'—'}</span><span>${d.ag||'—'}</span><span>${d.co||'—'}</span><span>${d.fe||'—'}</span><span>${d.va?brl(d.va):'—'}</span></div>`;
+  });
+  card.innerHTML=`<div class="resumo-thead"><span>Fonte</span><span>Msgs</span><span>Agend.</span><span>Comp.</span><span>Fech.</span><span>Valor R$</span></div>${rows}<div class="resumo-total"><span>Total do mês</span><span>${tm||'—'}</span><span>${ta||'—'}</span><span>${tc||'—'}</span><span>${tf||'—'}</span><span>${tv?brl(tv):'—'}</span></div>`;
+  c.appendChild(card);
+
+  // KPIs resumo
+  const kpi=document.createElement('div');kpi.className='resumo-kpi';
+  const txA=tm>0?((ta/tm)*100).toFixed(1)+'%':'—';
+  const txC=ta>0?((tc/ta)*100).toFixed(1)+'%':'—';
+  const txF=tc>0?((tf/tc)*100).toFixed(1)+'%':'—';
+  const meta=parseFloat(document.getElementById('f-meta').value)||0;
+  const pct=meta>0?Math.round(tv/meta*100):null;
+  kpi.innerHTML=`
+    <div class="resumo-kpi-card"><div class="resumo-kpi-label">Mensagens</div><div class="resumo-kpi-val">${tm.toLocaleString('pt-BR')}</div><div class="resumo-kpi-sub">tx. agend. ${txA}</div></div>
+    <div class="resumo-kpi-card"><div class="resumo-kpi-label">Agendamentos</div><div class="resumo-kpi-val">${ta}</div><div class="resumo-kpi-sub">tx. comp. ${txC}</div></div>
+    <div class="resumo-kpi-card"><div class="resumo-kpi-label">Fechamentos</div><div class="resumo-kpi-val">${tf}</div><div class="resumo-kpi-sub">tx. fech. ${txF}</div></div>
+    <div class="resumo-kpi-card"><div class="resumo-kpi-label">Faturado</div><div class="resumo-kpi-val" style="font-size:18px;color:var(--green)">${brl(tv)}</div><div class="resumo-kpi-sub">${pct!==null?pct+'% da meta':''}</div></div>
+    ${inv?`<div class="resumo-kpi-card"><div class="resumo-kpi-label">Investido</div><div class="resumo-kpi-val" style="font-size:18px">${brl(inv)}</div><div class="resumo-kpi-sub">custo/lead ${cpl?'R$'+parseFloat(cpl).toLocaleString('pt-BR',{minimumFractionDigits:2}):'—'}</div></div>`:''}`;
+  c.appendChild(kpi);
 }
 
 // ── ENTRY UI ──
 function buildEntryBody(){
   const body=document.getElementById('entry-body'),cw=document.getElementById('comp-detail-wrap');
-  body.innerHTML=''; cw.innerHTML='';
+  if(!body||!cw) return;
+  body.innerHTML='';cw.innerHTML='';
   let lastG=null;
   FONTES.forEach(f=>{
-    if(f.grupo!==lastG){ const g=document.createElement('div'); g.className='group-label'; g.textContent=f.grupo; body.appendChild(g); lastG=f.grupo; }
-    const row=document.createElement('div'); row.className='entry-row-data';
+    if(f.grupo!==lastG){const g=document.createElement('div');g.className='group-label';g.textContent=f.grupo;body.appendChild(g);lastG=f.grupo;}
+    const row=document.createElement('div');row.className='entry-row-data';
     const ic=f.icon?`<span class="fonte-icon">${f.icon}</span>`:'<span class="fonte-icon"></span>';
-    row.innerHTML=`<div class="fonte-cell">${ic}<span class="fonte-name-text">${f.label}</span></div>${COLS.map(c=>`<input type="number" id="i-${f.id}-${c}" min="0" placeholder="—" ${c==='va'?'step="100"':''}/>`).join('')}`;
+    row.innerHTML=`<div class="fonte-cell">${ic}<span class="fonte-name-text">${f.label}</span></div>${COLS.map(col=>`<input type="number" id="i-${f.id}-${col}" min="0" placeholder="—" ${col==='va'?'step="100"':''}/>`).join('')}`;
     body.appendChild(row);
-    COLS.forEach(c=>document.getElementById(`i-${f.id}-${c}`).addEventListener('input',calcTotals));
-    const cd=document.createElement('div'); cd.className='comp-detail-row';
+    COLS.forEach(col=>document.getElementById(`i-${f.id}-${col}`).addEventListener('input',calcTotals));
+    const cd=document.createElement('div');cd.className='comp-detail-row';
     cd.innerHTML=`<div class="comp-detail-fonte">${f.icon||''}${f.label}</div><textarea id="cd-${f.id}" placeholder="Nome, status, próximo passo..."></textarea>`;
     cw.appendChild(cd);
   });
 }
 
-function buildWkSel(){
-  const el=document.getElementById('wk-sel'); el.innerHTML='';
-  for(let i=0;i<5;i++){
-    const b=document.createElement('button'); b.className='wk-btn'+(i===curSem?' active':'');
-    if(Object.values(semData[i].fontes).some(f=>f.msg>0)&&i!==curSem) b.classList.add('has-data');
-    b.textContent='Semana '+(i+1);
-    b.onclick=()=>{ salvarState(); curSem=i; loadCur(); buildWkSel(); };
-    el.appendChild(b);
-  }
-}
-
 function salvarState(){
+  if(curTab===5) return;
   FONTES.forEach(f=>{
-    COLS.forEach(c=>{ const el=document.getElementById(`i-${f.id}-${c}`); if(el) semData[curSem].fontes[f.id][c]=+el.value||0; });
-    const cd=document.getElementById(`cd-${f.id}`); if(cd) semData[curSem].fontes[f.id].comp_det=cd.value;
+    COLS.forEach(col=>{const el=document.getElementById(`i-${f.id}-${col}`);if(el)semData[curTab].fontes[f.id][col]=+el.value||0;});
+    const cd=document.getElementById(`cd-${f.id}`);if(cd)semData[curTab].fontes[f.id].comp_det=cd.value;
   });
-  semData[curSem].obs=document.getElementById('f-obs')?.value||'';
+  semData[curTab].obs=document.getElementById('f-obs')?.value||'';
 }
 
 function loadCur(){
   FONTES.forEach(f=>{
-    COLS.forEach(c=>{ const el=document.getElementById(`i-${f.id}-${c}`); if(el){ const v=semData[curSem].fontes[f.id][c]; el.value=v||''; } });
-    const cd=document.getElementById(`cd-${f.id}`); if(cd) cd.value=semData[curSem].fontes[f.id].comp_det||'';
+    COLS.forEach(col=>{const el=document.getElementById(`i-${f.id}-${col}`);if(el){const v=semData[curTab].fontes[f.id][col];el.value=v||'';}});
+    const cd=document.getElementById(`cd-${f.id}`);if(cd)cd.value=semData[curTab].fontes[f.id].comp_det||'';
   });
-  document.getElementById('f-obs').value=semData[curSem].obs||'';
+  const obs=document.getElementById('f-obs');if(obs)obs.value=semData[curTab].obs||'';
   calcTotals();
 }
 
 function calcTotals(){
   const s={msg:0,ag:0,co:0,fe:0,va:0};
-  FONTES.forEach(f=>COLS.forEach(c=>{ s[c]+=+document.getElementById(`i-${f.id}-${c}`)?.value||0; }));
-  document.getElementById('t-msg').textContent=s.msg||'—';
-  document.getElementById('t-ag').textContent=s.ag||'—';
-  document.getElementById('t-co').textContent=s.co||'—';
-  document.getElementById('t-fe').textContent=s.fe||'—';
-  document.getElementById('t-va').textContent=s.va?'R$'+s.va.toLocaleString('pt-BR'):'—';
+  FONTES.forEach(f=>COLS.forEach(col=>{s[col]+=+document.getElementById(`i-${f.id}-${col}`)?.value||0;}));
+  const set=(id,v)=>{const el=document.getElementById(id);if(el)el.textContent=v;};
+  set('t-msg',s.msg||'—');set('t-ag',s.ag||'—');set('t-co',s.co||'—');set('t-fe',s.fe||'—');
+  set('t-va',s.va?'R$'+s.va.toLocaleString('pt-BR'):'—');
 }
 
 async function salvar(){
   salvarState();
   const key=document.getElementById('f-mes').value||curMes;
-  if(key!==curMes){ delete meses[curMes]; curMes=key; }
+  if(key!==curMes){delete meses[curMes];curMes=key;}
   meses[curMes]={clinica:document.getElementById('f-clinica').value||'',mes:key,meta:document.getElementById('f-meta').value||'',semanas:JSON.parse(JSON.stringify(semData))};
   await salvarDrive();
   renderMonthPills();
@@ -791,21 +683,39 @@ async function salvar(){
 
 function goTo(s){
   document.querySelectorAll('.section').forEach(el=>el.classList.remove('active'));
-  document.querySelectorAll('.nav-btn').forEach((b,i)=>{ b.classList.remove('active'); if(['dados','dashboard','historico','relatorio'][i]===s) b.classList.add('active'); });
+  document.querySelectorAll('.nav-btn').forEach((b,i)=>{b.classList.remove('active');if(['dados','dashboard','historico','relatorio'][i]===s)b.classList.add('active');});
   document.getElementById('s-'+s).classList.add('active');
 }
 
-// ── CHARTS ──
-const CO={responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{x:{grid:{color:'rgba(201,168,76,0.05)'},ticks:{color:'rgba(250,250,248,0.35)',font:{size:10,family:'Montserrat'}},border:{color:'rgba(201,168,76,0.12)'}},y:{grid:{color:'rgba(201,168,76,0.05)'},ticks:{color:'rgba(250,250,248,0.35)',font:{size:10,family:'Montserrat'}},border:{color:'rgba(201,168,76,0.12)'}}}};
-function dc(id){ if(charts[id]){ charts[id].destroy(); delete charts[id]; } }
-function getAllData(){ return Array.from({length:5},(_,i)=>{ let m=0,a=0,c=0,f=0,v=0; FONTES.forEach(fo=>{ const d=semData[i].fontes[fo.id]; m+=d.msg;a+=d.ag;c+=d.co;f+=d.fe;v+=d.va; }); return {idx:i,msg:m,ag:a,co:c,fe:f,va:v,obs:semData[i].obs,fontes:semData[i].fontes}; }); }
+// ── DASHBOARD ──
+function getDataFromMes(key){
+  const m=meses[key];if(!m) return [];
+  return Array.from({length:5},(_,i)=>{
+    let msg=0,ag=0,co=0,fe=0,va=0;
+    FONTES.forEach(f=>{const d=m.semanas[i].fontes[f.id];msg+=d.msg;ag+=d.ag;co+=d.co;fe+=d.fe;va+=d.va;});
+    return{idx:i,msg,ag,co,fe,va,fontes:m.semanas[i].fontes};
+  });
+}
+
+function renderDashMesPills(){
+  const c=document.getElementById('dash-mes-pills');c.innerHTML='';
+  if(!dashMes||!meses[dashMes]) dashMes=getMesKeys().at(-1);
+  getMesKeys().forEach(k=>{
+    const b=document.createElement('button');
+    b.className='dash-mes-pill'+(k===dashMes?' active':'');
+    b.textContent=formatMes(k);
+    b.onclick=()=>{dashMes=k;renderDash();};
+    c.appendChild(b);
+  });
+}
 
 function renderDash(){
-  salvarState();
-  const all=getAllData();
+  if(!dashMes||!meses[dashMes]) dashMes=getMesKeys().at(-1)||curMes;
+  renderDashMesPills();
+  const all=getDataFromMes(dashMes);
   let tm=0,ta=0,tc=0,tf=0,tv=0;
   all.forEach(w=>{tm+=w.msg;ta+=w.ag;tc+=w.co;tf+=w.fe;tv+=w.va;});
-  const meta=+document.getElementById('f-meta').value||0;
+  const meta=parseFloat(meses[dashMes]?.meta||0);
   const pct=meta>0?Math.round(tv/meta*100):null;
   document.getElementById('kpi-grid').innerHTML=`
     <div class="kpi-card"><div class="kpi-label">Mensagens</div><div class="kpi-val">${tm.toLocaleString('pt-BR')}</div><div class="kpi-sub">agend. ${tm?((ta/tm)*100).toFixed(1):'—'}%</div></div>
@@ -813,49 +723,53 @@ function renderDash(){
     <div class="kpi-card"><div class="kpi-label">Fechamentos</div><div class="kpi-val">${tf}</div><div class="kpi-sub">conv. ${tc?((tf/tc)*100).toFixed(1):'—'}%</div></div>
     <div class="kpi-card"><div class="kpi-label">Faturado</div><div class="kpi-val" style="font-size:22px">R$&nbsp;${tv.toLocaleString('pt-BR')}</div><div class="kpi-sub">${pct!==null?pct+'% da meta':''}</div>${pct!==null?`<div class="progress-track"><div class="progress-fill" style="width:${Math.min(pct,100)}%"></div></div>`:''}</div>`;
   const labs=all.map((_,i)=>'S'+(i+1));
-  dc('ch1'); charts['ch1']=new Chart(document.getElementById('ch1'),{type:'bar',data:{labels:labs,datasets:[{label:'Msgs',data:all.map(w=>w.msg),backgroundColor:'rgba(201,168,76,0.16)',borderRadius:2},{label:'Agend.',data:all.map(w=>w.ag),backgroundColor:'rgba(201,168,76,0.48)',borderRadius:2},{label:'Comp.',data:all.map(w=>w.co),backgroundColor:'#C9A84C',borderRadius:2}]},options:{...CO}});
+  dc('ch1');charts['ch1']=new Chart(document.getElementById('ch1'),{type:'bar',data:{labels:labs,datasets:[{label:'Msgs',data:all.map(w=>w.msg),backgroundColor:'rgba(201,168,76,0.16)',borderRadius:2},{label:'Agend.',data:all.map(w=>w.ag),backgroundColor:'rgba(201,168,76,0.48)',borderRadius:2},{label:'Comp.',data:all.map(w=>w.co),backgroundColor:'#C9A84C',borderRadius:2}]},options:{...CO}});
   document.getElementById('leg1').innerHTML=[{c:'rgba(201,168,76,0.16)',l:'Mensagens'},{c:'rgba(201,168,76,0.48)',l:'Agendamentos'},{c:'#C9A84C',l:'Comparecimentos'}].map(x=>`<span class="chart-leg-i"><span style="width:10px;height:10px;border-radius:2px;background:${x.c};display:inline-block"></span>${x.l}</span>`).join('');
-  dc('ch2'); charts['ch2']=new Chart(document.getElementById('ch2'),{type:'bar',data:{labels:labs,datasets:[{label:'R$',data:all.map(w=>w.va),backgroundColor:'#C9A84C',borderRadius:2}]},options:{...CO,scales:{x:CO.scales.x,y:{...CO.scales.y,ticks:{...CO.scales.y.ticks,callback:v=>'R$'+(v>=1000?(v/1000).toFixed(0)+'k':v)}}}}});
-  dc('ch3'); charts['ch3']=new Chart(document.getElementById('ch3'),{type:'doughnut',data:{labels:FONTES.map(f=>f.label),datasets:[{data:FONTES.map(f=>all.reduce((a,w)=>a+w.fontes[f.id].msg,0)),backgroundColor:['rgba(201,168,76,0.9)','rgba(201,168,76,0.65)','rgba(201,168,76,0.45)','rgba(201,168,76,0.3)','rgba(201,168,76,0.18)','rgba(201,168,76,0.1)'],borderColor:'#111',borderWidth:2}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{position:'right',labels:{color:'rgba(250,250,248,0.5)',font:{size:10,family:'Montserrat'},boxWidth:10,padding:12}}}}});
+  dc('ch2');charts['ch2']=new Chart(document.getElementById('ch2'),{type:'bar',data:{labels:labs,datasets:[{label:'R$',data:all.map(w=>w.va),backgroundColor:'#C9A84C',borderRadius:2}]},options:{...CO,scales:{x:CO.scales.x,y:{...CO.scales.y,ticks:{...CO.scales.y.ticks,callback:v=>'R$'+(v>=1000?(v/1000).toFixed(0)+'k':v)}}}}});
+  dc('ch3');charts['ch3']=new Chart(document.getElementById('ch3'),{type:'doughnut',data:{labels:FONTES.map(f=>f.label),datasets:[{data:FONTES.map(f=>all.reduce((a,w)=>a+w.fontes[f.id].msg,0)),backgroundColor:['rgba(201,168,76,0.9)','rgba(201,168,76,0.65)','rgba(201,168,76,0.45)','rgba(201,168,76,0.3)','rgba(201,168,76,0.18)','rgba(201,168,76,0.1)'],borderColor:'#111',borderWidth:2}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{position:'right',labels:{color:'rgba(250,250,248,0.5)',font:{size:10,family:'Montserrat'},boxWidth:10,padding:12}}}}});
 }
 
+// ── HISTÓRICO ──
 function renderHistorico(){
-  const keys=getMesKeys(),grid=document.getElementById('historico-grid'); grid.innerHTML='';
-  if(!keys.length){ grid.innerHTML='<div class="compare-card"><p style="font-size:11px;color:var(--white-dim)">Nenhum mês salvo.</p></div>'; return; }
-  let prev=null,hf=[],hl=[];
+  const keys=getMesKeys(),grid=document.getElementById('historico-grid');grid.innerHTML='';
+  if(!keys.length){grid.innerHTML='<div class="compare-card"><p style="font-size:11px;color:var(--white-dim)">Nenhum mês.</p></div>';return;}
+  let hf=[],hl=[];
   keys.forEach(k=>{
-    const m=meses[k]; let tm=0,ta=0,tc=0,tf=0,tv=0;
+    const m=meses[k];let tm=0,ta=0,tc=0,tf=0,tv=0;
     m.semanas.forEach(s=>FONTES.forEach(f=>{const d=s.fontes[f.id];tm+=d.msg;ta+=d.ag;tc+=d.co;tf+=d.fe;tv+=d.va;}));
-    const dl=prev!==null?tv-prev:null;
-    const dh=dl!==null?`<span class="compare-val ${dl>=0?'up':'down'}">${dl>=0?'+':''}R$${dl.toLocaleString('pt-BR')}</span>`:'<span class="compare-val">—</span>';
-    hf.push(tv); hl.push(formatMes(k));
-    const card=document.createElement('div'); card.className='compare-card';
+    hf.push(tv);hl.push(formatMes(k));
+    const inv=INVESTIMENTOS[k]||0;
+    const cpl=tm>0?(inv/tm):null;
+    const card=document.createElement('div');card.className='compare-card';
     if(k===curMes) card.style.borderTop='2px solid var(--gold)';
     card.innerHTML=`<div class="compare-month">${formatMes(k)}</div>
-      ${[['Mensagens',tm],['Agendamentos',ta],['Comparecimentos',tc],['Fechamentos',tf]].map(([l,v])=>`<div class="compare-row"><span class="compare-key">${l}</span><span class="compare-val">${v}</span></div>`).join('')}
+      ${[['Mensagens',tm.toLocaleString('pt-BR')],['Agendamentos',ta],['Comparecimentos',tc],['Fechamentos',tf]].map(([l,v])=>`<div class="compare-row"><span class="compare-key">${l}</span><span class="compare-val">${v}</span></div>`).join('')}
       <div class="compare-row"><span class="compare-key">Tx. Agend.</span><span class="compare-val">${tm?((ta/tm)*100).toFixed(1)+'%':'—'}</span></div>
       <div class="compare-row"><span class="compare-key">Tx. Comp.</span><span class="compare-val">${ta?((tc/ta)*100).toFixed(1)+'%':'—'}</span></div>
       <div class="compare-row"><span class="compare-key">Tx. Fech.</span><span class="compare-val">${tc?((tf/tc)*100).toFixed(1)+'%':'—'}</span></div>
-      <div class="compare-row"><span class="compare-key">Faturado</span><span class="compare-val">R$${tv.toLocaleString('pt-BR')}</span></div>
-      <div class="compare-row"><span class="compare-key">vs anterior</span>${dh}</div>`;
-    grid.appendChild(card); prev=tv;
+      <div class="compare-row"><span class="compare-key">Valor Faturado</span><span class="compare-val green">${brl(tv)}</span></div>
+      <div class="compare-row"><span class="compare-key">Valor Investido</span><span class="compare-val">${inv?brl(inv):'—'}</span></div>
+      <div class="compare-row"><span class="compare-key">Custo por Lead</span><span class="compare-val">${cpl?'R$'+cpl.toLocaleString('pt-BR',{minimumFractionDigits:2,maximumFractionDigits:2}):'—'}</span></div>`;
+    grid.appendChild(card);
   });
-  dc('ch-hist'); charts['ch-hist']=new Chart(document.getElementById('ch-hist'),{type:'line',data:{labels:hl,datasets:[{label:'Faturamento',data:hf,borderColor:'#C9A84C',backgroundColor:'rgba(201,168,76,0.08)',borderWidth:2,pointBackgroundColor:'#C9A84C',pointRadius:4,tension:0.3,fill:true}]},options:{...CO,scales:{x:CO.scales.x,y:{...CO.scales.y,ticks:{...CO.scales.y.ticks,callback:v=>'R$'+(v>=1000?(v/1000).toFixed(0)+'k':v)}}}}});
+  dc('ch-hist');charts['ch-hist']=new Chart(document.getElementById('ch-hist'),{type:'line',data:{labels:hl,datasets:[{label:'Faturamento',data:hf,borderColor:'#C9A84C',backgroundColor:'rgba(201,168,76,0.08)',borderWidth:2,pointBackgroundColor:'#C9A84C',pointRadius:4,tension:0.3,fill:true}]},options:{...CO,scales:{x:CO.scales.x,y:{...CO.scales.y,ticks:{...CO.scales.y.ticks,callback:v=>'R$'+(v>=1000?(v/1000).toFixed(0)+'k':v)}}}}});
 }
 
+// ── AI ──
 async function gerarRelatorio(){
   salvarState();
-  const key=getKey(); if(!key){ abrirModal('modal-api'); return; }
-  const all=getAllData(),out=document.getElementById('rel-out');
-  const clinica=document.getElementById('f-clinica').value||'Clínica';
-  const mes=document.getElementById('f-mes').value||'mês atual';
-  const meta=document.getElementById('f-meta').value||'não informada';
-  let tm=0,ta=0,tc=0,tf=0,tv=0; all.forEach(w=>{tm+=w.msg;ta+=w.ag;tc+=w.co;tf+=w.fe;tv+=w.va;});
+  const key=getKey();if(!key){abrirModal('modal-api');return;}
+  const mesKey=dashMes||curMes;
+  const all=getDataFromMes(mesKey);
+  const out=document.getElementById('rel-out');
+  const clinica=meses[mesKey]?.clinica||'Clínica';
+  const mes=mesKey;const meta=meses[mesKey]?.meta||'não informada';
+  let tm=0,ta=0,tc=0,tf=0,tv=0;all.forEach(w=>{tm+=w.msg;ta+=w.ag;tc+=w.co;tf+=w.fe;tv+=w.va;});
   let resumo=`TOTAIS: ${tm} msgs | ${ta} agend | ${tc} comp | ${tf} fech | R$${tv.toLocaleString('pt-BR')}\n`;
-  all.forEach(w=>{ if(!w.msg&&!w.va) return; resumo+=`\nSem.${w.idx+1}: ${w.msg}msg ${w.ag}ag ${w.co}co ${w.fe}fe R$${w.va}\n`; FONTES.forEach(f=>{const d=w.fontes[f.id];if(d.msg||d.va){resumo+=`  ${f.label}: ${d.msg}m ${d.ag}ag ${d.co}co ${d.fe}fe R$${d.va}${d.comp_det?' | '+d.comp_det:''}\n`;}}); if(w.obs)resumo+=`  Obs: ${w.obs}\n`; });
+  all.forEach(w=>{if(!w.msg&&!w.va)return;resumo+=`\nSem.${w.idx+1}: ${w.msg}msg ${w.ag}ag ${w.co}co ${w.fe}fe R$${w.va}\n`;FONTES.forEach(f=>{const d=w.fontes[f.id];if(d.msg||d.va){resumo+=`  ${f.label}: ${d.msg}m ${d.ag}ag ${d.co}co ${d.fe}fe R$${d.va}${d.comp_det?' | '+d.comp_det:''}\n`;}});});
   out.innerHTML=`<div class="ai-grid"><div class="ai-cell"><div class="ai-cell-label">Análise · Funil · Gargalo</div><div class="ai-text" id="ai-a"><span class="dots"><span></span><span></span><span></span></span> Analisando...</div></div><div class="ai-cell" id="blk-ac" style="display:none"><div class="ai-cell-label">Plano de ação</div><div class="ai-text" id="ai-ac"></div></div></div>`;
   const sys='Gestor de tráfego e estrategista sênior em odontologia estética premium. Objetivo, sem introduções. Português BR.';
-  const p1=`CLÍNICA: ${clinica} | MÊS: ${mes} | META: R$${meta}\nFontes WhatsApp: 📣Megafone 🦷Dentinho 🤙Mãozinha. Digitais: Site/Google, Branding, Indicação.\nMetas: Agend 10% | Comp 50% | Fech 50%\n${resumo}\n\nRANKING DE PÚBLICOS\n[posição nome justificativa]\n\nFUNIL POR SEMANA\n[semana taxas reais vs meta]\n\nGARGALO PRINCIPAL\n[até 3 linhas]`;
+  const p1=`CLÍNICA: ${clinica} | MÊS: ${mes} | META: R$${meta}\nFontes WhatsApp: 📣Megafone 🦷Dentinho 🤙Mãozinha. Digitais: Site/Google, Branding, Indicação.\nMetas: Agend 10% | Comp 50% | Fech 50%\n${resumo}\n\nRANKING DE PÚBLICOS\nFUNIL POR SEMANA\nGARGALO PRINCIPAL`;
   const p2=p1+`\n\nPLANO DE AÇÃO PRÓXIMA SEMANA\n[5-7 ações: N. [Público] — [Ação] → [Resultado]]`;
   const H={'Content-Type':'application/json','x-api-key':key,'anthropic-version':'2023-06-01','anthropic-dangerous-direct-browser-access':'true'};
   try{
@@ -867,17 +781,49 @@ async function gerarRelatorio(){
     document.getElementById('ai-a').textContent=d1.content?.find(b=>b.type==='text')?.text||'Erro.';
     document.getElementById('ai-ac').textContent=d2.content?.find(b=>b.type==='text')?.text||'';
     document.getElementById('blk-ac').style.display='block';
-    const f=document.createElement('div'); f.className='action-row'; f.style.marginTop='1.5rem';
+    const f=document.createElement('div');f.className='action-row';f.style.marginTop='1.5rem';
     f.innerHTML=`<button class="btn-ghost" onclick="gerarRelatorio()">Regenerar ↺</button>`;
     out.appendChild(f);
-  }catch(e){
-    document.getElementById('ai-a').innerHTML=`<span style="color:#EB5757">Erro: ${e.message}</span>`;
-  }
+  }catch(e){document.getElementById('ai-a').innerHTML=`<span style="color:#EB5757">Erro: ${e.message}</span>`;}
 }
 
-// ── START ──
+// ── CHARTS OPTS ──
+const CO={responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{x:{grid:{color:'rgba(201,168,76,0.05)'},ticks:{color:'rgba(250,250,248,0.35)',font:{size:10,family:'Montserrat'}},border:{color:'rgba(201,168,76,0.12)'}},y:{grid:{color:'rgba(201,168,76,0.05)'},ticks:{color:'rgba(250,250,248,0.35)',font:{size:10,family:'Montserrat'}},border:{color:'rgba(201,168,76,0.12)'}}}};
+function dc(id){if(charts[id]){charts[id].destroy();delete charts[id];}}
+
+// ── INIT DADOS ──
+function initDados(){
+  meses['2025-01']={clinica:'Clínica Viotto Salvador',mes:'2025-01',meta:'',semanas:[
+    {obs:'',fontes:{anuncio:{msg:31,ag:1,co:0,fe:0,va:0,comp_det:''},dentista:{msg:46,ag:5,co:1,fe:0,va:0,comp_det:''},chave:{msg:47,ag:2,co:0,fe:0,va:0,comp_det:''},site:{msg:9,ag:2,co:2,fe:0,va:0,comp_det:''},branding:{msg:40,ag:6,co:5,fe:1,va:25800,comp_det:'Sandra Conceição entrada de 10k+ 10x no boleto de R$1580'},indicacao:{msg:0,ag:0,co:0,fe:0,va:0,comp_det:''}}},
+    {obs:'',fontes:{anuncio:{msg:0,ag:0,co:0,fe:0,va:0,comp_det:''},dentista:{msg:48,ag:1,co:1,fe:0,va:0,comp_det:''},chave:{msg:59,ag:1,co:1,fe:1,va:8100,comp_det:''},site:{msg:10,ag:0,co:2,fe:1,va:1100,comp_det:'1 AV INDICAÇÃO'},branding:{msg:31,ag:5,co:1,fe:0,va:0,comp_det:''},indicacao:{msg:0,ag:0,co:0,fe:0,va:0,comp_det:''}}},
+    {obs:'',fontes:{anuncio:{msg:0,ag:0,co:0,fe:0,va:0,comp_det:''},dentista:{msg:45,ag:3,co:2,fe:1,va:7600,comp_det:''},chave:{msg:53,ag:2,co:0,fe:0,va:0,comp_det:''},site:{msg:24,ag:3,co:1,fe:0,va:0,comp_det:'2 AV INDICAÇÃO'},branding:{msg:41,ag:4,co:0,fe:0,va:0,comp_det:'Senhora potencial, vai se organizar para iniciar'},indicacao:{msg:0,ag:0,co:0,fe:0,va:0,comp_det:''}}},
+    {obs:'',fontes:{anuncio:{msg:0,ag:0,co:0,fe:0,va:0,comp_det:''},dentista:{msg:64,ag:3,co:1,fe:0,va:0,comp_det:''},chave:{msg:40,ag:0,co:1,fe:0,va:0,comp_det:'COMPARECIMENTO POTENCIAL'},site:{msg:18,ag:0,co:0,fe:0,va:0,comp_det:''},branding:{msg:30,ag:4,co:0,fe:0,va:0,comp_det:''},indicacao:{msg:0,ag:0,co:0,fe:0,va:0,comp_det:''}}},
+    {obs:'',fontes:{anuncio:{msg:0,ag:0,co:0,fe:0,va:0,comp_det:''},dentista:{msg:0,ag:0,co:0,fe:0,va:0,comp_det:''},chave:{msg:0,ag:0,co:0,fe:0,va:0,comp_det:''},site:{msg:0,ag:0,co:0,fe:0,va:0,comp_det:''},branding:{msg:0,ag:0,co:0,fe:0,va:0,comp_det:''},indicacao:{msg:0,ag:0,co:0,fe:0,va:0,comp_det:''}}}
+  ]};
+  meses['2025-02']={clinica:'Clínica Viotto Salvador',mes:'2025-02',meta:'',semanas:[
+    {obs:'',fontes:{anuncio:{msg:0,ag:0,co:0,fe:0,va:0,comp_det:''},dentista:{msg:74,ag:3,co:1,fe:0,va:0,comp_det:'Comparecimento potencial'},chave:{msg:46,ag:0,co:1,fe:0,va:0,comp_det:'Comparecimento potencial'},site:{msg:16,ag:5,co:1,fe:0,va:0,comp_det:''},branding:{msg:46,ag:6,co:6,fe:1,va:30000,comp_det:'3 comparecimentos potencial'},indicacao:{msg:0,ag:0,co:0,fe:0,va:0,comp_det:''}}},
+    {obs:'',fontes:{anuncio:{msg:0,ag:0,co:0,fe:0,va:0,comp_det:''},dentista:{msg:10,ag:2,co:0,fe:0,va:0,comp_det:''},chave:{msg:10,ag:0,co:1,fe:0,va:0,comp_det:''},site:{msg:9,ag:3,co:3,fe:3,va:1980,comp_det:'3 comparecimento potencial'},branding:{msg:13,ag:0,co:0,fe:0,va:0,comp_det:''},indicacao:{msg:0,ag:0,co:0,fe:0,va:0,comp_det:''}}},
+    {obs:'',fontes:{anuncio:{msg:10,ag:0,co:0,fe:0,va:0,comp_det:''},dentista:{msg:30,ag:3,co:1,fe:0,va:0,comp_det:''},chave:{msg:33,ag:0,co:0,fe:0,va:0,comp_det:''},site:{msg:7,ag:0,co:0,fe:0,va:0,comp_det:''},branding:{msg:11,ag:3,co:1,fe:1,va:80000,comp_det:''},indicacao:{msg:0,ag:0,co:0,fe:0,va:0,comp_det:''}}},
+    {obs:'',fontes:{anuncio:{msg:16,ag:1,co:0,fe:0,va:0,comp_det:''},dentista:{msg:75,ag:1,co:1,fe:1,va:1050,comp_det:'1 Comparecimento potencial'},chave:{msg:23,ag:5,co:0,fe:0,va:0,comp_det:''},site:{msg:11,ag:1,co:0,fe:0,va:0,comp_det:''},branding:{msg:14,ag:6,co:5,fe:1,va:3000,comp_det:'1 comparecimento com potencial'},indicacao:{msg:0,ag:0,co:0,fe:0,va:0,comp_det:''}}},
+    {obs:'',fontes:{anuncio:{msg:0,ag:0,co:0,fe:0,va:0,comp_det:''},dentista:{msg:0,ag:0,co:0,fe:0,va:0,comp_det:''},chave:{msg:0,ag:0,co:0,fe:0,va:0,comp_det:''},site:{msg:0,ag:0,co:0,fe:0,va:0,comp_det:''},branding:{msg:0,ag:0,co:0,fe:0,va:0,comp_det:''},indicacao:{msg:0,ag:0,co:0,fe:0,va:0,comp_det:''}}}
+  ]};
+  meses['2025-03']={clinica:'Clínica Viotto Salvador',mes:'2025-03',meta:'',semanas:[
+    {obs:'',fontes:{anuncio:{msg:14,ag:1,co:0,fe:0,va:0,comp_det:''},dentista:{msg:91,ag:9,co:1,fe:0,va:0,comp_det:''},chave:{msg:31,ag:2,co:1,fe:0,va:0,comp_det:''},site:{msg:13,ag:1,co:2,fe:0,va:0,comp_det:''},branding:{msg:17,ag:7,co:2,fe:0,va:0,comp_det:''},indicacao:{msg:2,ag:2,co:1,fe:1,va:650,comp_det:''}}},
+    {obs:'',fontes:{anuncio:{msg:0,ag:0,co:0,fe:0,va:0,comp_det:''},dentista:{msg:31,ag:1,co:2,fe:0,va:0,comp_det:'1 EMILCON bom potencial / 2 MATEUS apenas levou o planejamento'},chave:{msg:41,ag:3,co:0,fe:0,va:0,comp_det:''},site:{msg:15,ag:2,co:4,fe:2,va:1000,comp_det:'1 ANA já iniciou / 2 CRISTINA indicou o marido / 3 WAGNER levou planejamento / 4 Brenda começa dia 25'},branding:{msg:11,ag:0,co:0,fe:0,va:0,comp_det:''},indicacao:{msg:2,ag:1,co:2,fe:0,va:750,comp_det:'JORGE iniciando tratamento / DANIEL bom potencial levou planejamento'}}},
+    {obs:'',fontes:{anuncio:{msg:0,ag:0,co:0,fe:0,va:0,comp_det:''},dentista:{msg:53,ag:2,co:0,fe:0,va:0,comp_det:''},chave:{msg:57,ag:3,co:2,fe:1,va:51200,comp_det:'RAMON: JOGADOR DE FUTEBOL JA PAGOU TODO O PLANEJAMENTO / SHIRLEY AGENDADA PAG. 24/03'},site:{msg:10,ag:0,co:4,fe:0,va:2200,comp_det:'SO PAGOU A LIMPEZA MAS JA AGENDOU RETORNO. DEMAIS LEADS LEVOU PLANEJAMENTO NAO RETORNOU'},branding:{msg:18,ag:4,co:1,fe:1,va:8800,comp_det:'JA PAGOU TODO O PLANEJAMENTO'},indicacao:{msg:0,ag:0,co:1,fe:0,va:0,comp_det:'ESPOSO DE PACIENTE - LEVOU PLANEJAMENTO VAI ANALIZAR'}}},
+    {obs:'',fontes:{anuncio:{msg:0,ag:0,co:0,fe:0,va:0,comp_det:''},dentista:{msg:54,ag:2,co:2,fe:0,va:0,comp_det:'1 Lead sem perfil'},chave:{msg:60,ag:1,co:0,fe:0,va:600,comp_det:'PAGOU APENAS MANUTENCAO DE LENTE'},site:{msg:7,ag:2,co:2,fe:2,va:6900,comp_det:'1 FEZ AVALIAÇÃO E PAGOU TODO PLANEJAMENTO 5.750 / 2 JA PAGOU 1.150'},branding:{msg:9,ag:3,co:1,fe:1,va:3000,comp_det:'2 PACIENTES PAGARAM LIMPEZA E AGENDARAM RETORNO'},indicacao:{msg:0,ag:0,co:1,fe:0,va:1900,comp_det:'ESPOSA DO MARIDO QUE AGENDOU AVALIAÇÃO JUNTO'}}},
+    {obs:'',fontes:{anuncio:{msg:0,ag:0,co:0,fe:0,va:0,comp_det:''},dentista:{msg:0,ag:0,co:0,fe:0,va:0,comp_det:''},chave:{msg:0,ag:0,co:0,fe:0,va:0,comp_det:''},site:{msg:0,ag:0,co:0,fe:0,va:0,comp_det:''},branding:{msg:0,ag:0,co:0,fe:0,va:0,comp_det:''},indicacao:{msg:0,ag:0,co:0,fe:0,va:0,comp_det:''}}}
+  ]};
+  meses['2025-04']={clinica:'Clínica Viotto Salvador',mes:'2025-04',meta:'',semanas:[
+    {obs:'',fontes:{anuncio:{msg:0,ag:0,co:0,fe:0,va:0,comp_det:''},dentista:{msg:17,ag:2,co:0,fe:0,va:0,comp_det:''},chave:{msg:48,ag:4,co:0,fe:0,va:0,comp_det:''},site:{msg:10,ag:1,co:1,fe:0,va:0,comp_det:'Lead potencial'},branding:{msg:17,ag:5,co:2,fe:0,va:0,comp_det:'Dois leads qualificados.'},indicacao:{msg:0,ag:0,co:0,fe:0,va:0,comp_det:''}}},
+    {obs:'',fontes:{anuncio:{msg:0,ag:0,co:0,fe:0,va:0,comp_det:''},dentista:{msg:22,ag:0,co:0,fe:0,va:0,comp_det:''},chave:{msg:65,ag:6,co:3,fe:1,va:9300,comp_det:'1 retorno de avaliação deu entrada.'},site:{msg:13,ag:0,co:0,fe:0,va:0,comp_det:''},branding:{msg:14,ag:5,co:1,fe:1,va:700,comp_det:'Já realizou exo.'},indicacao:{msg:0,ag:0,co:0,fe:0,va:0,comp_det:''}}},
+    {obs:'',fontes:{anuncio:{msg:0,ag:0,co:0,fe:0,va:0,comp_det:''},dentista:{msg:7,ag:1,co:1,fe:0,va:0,comp_det:'Bom perfil, retorna sábado.'},chave:{msg:71,ag:6,co:1,fe:0,va:0,comp_det:'Lead desqualificado.'},site:{msg:15,ag:4,co:4,fe:2,va:96900,comp_det:'Dois pagantes.'},branding:{msg:12,ag:4,co:2,fe:1,va:5000,comp_det:'Um pagou parte do planejamento.'},indicacao:{msg:0,ag:0,co:0,fe:0,va:0,comp_det:''}}},
+    {obs:'',fontes:{anuncio:{msg:9,ag:0,co:0,fe:0,va:0,comp_det:''},dentista:{msg:0,ag:0,co:0,fe:0,va:0,comp_det:''},chave:{msg:67,ag:8,co:1,fe:0,va:0,comp_det:'Inicia em junho.'},site:{msg:10,ag:5,co:4,fe:0,va:0,comp_det:'Em acompanhamento.'},branding:{msg:5,ag:2,co:2,fe:2,va:11350,comp_det:'Já iniciaram tratamento.'},indicacao:{msg:0,ag:0,co:0,fe:0,va:0,comp_det:''}}},
+    {obs:'',fontes:{anuncio:{msg:0,ag:0,co:0,fe:0,va:0,comp_det:''},dentista:{msg:0,ag:0,co:0,fe:0,va:0,comp_det:''},chave:{msg:0,ag:0,co:0,fe:0,va:0,comp_det:''},site:{msg:0,ag:0,co:0,fe:0,va:0,comp_det:''},branding:{msg:0,ag:0,co:0,fe:0,va:0,comp_det:''},indicacao:{msg:0,ag:0,co:0,fe:0,va:0,comp_det:''}}}
+  ]};
+}
+
 function iniciar(){
-  buildEntryBody();
   sincronizar();
 }
 </script>
