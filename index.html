@@ -781,9 +781,44 @@ async function lerArquivo(){
   try{return JSON.parse(t);}catch(e){return null;}
 }
 async function gravarArquivo(data){
+  // Força gerar token NOVO antes de gravar (evita usar token cacheado expirado)
+  tokenExp=0;
   const tok=await getAccessToken();
-  const r=await fetch(`https://www.googleapis.com/upload/drive/v3/files/${driveFileId}?uploadType=media&supportsAllDrives=true`,{method:'PATCH',headers:{Authorization:'Bearer '+tok,'Content-Type':'application/json'},body:JSON.stringify(data)});
-  if(!r.ok){const t=await r.text().catch(()=>'');throw new Error('Drive '+r.status+(t?': '+t.slice(0,80):''));}
+  const r=await fetch(`https://www.googleapis.com/upload/drive/v3/files/${driveFileId}?uploadType=media&supportsAllDrives=true`,{
+    method:'PATCH',
+    headers:{Authorization:'Bearer '+tok,'Content-Type':'application/json'},
+    body:JSON.stringify(data)
+  });
+  if(!r.ok){
+    const t=await r.text().catch(()=>'');
+    // Se der 403/404, tenta recriar o arquivo (pode estar com owner errado ou foi deletado)
+    if(r.status===403||r.status===404){
+      console.warn('PATCH falhou ('+r.status+'), tentando criar arquivo novo...');
+      // Tenta deletar o arquivo problemático
+      try{
+        await fetch(`https://www.googleapis.com/drive/v3/files/${driveFileId}?supportsAllDrives=true`,{
+          method:'DELETE',headers:{Authorization:'Bearer '+tok}
+        });
+      }catch(e){}
+      // Cria arquivo novo via multipart upload
+      const boundary='-------314159265358979323846';
+      const delim='\r\n--'+boundary+'\r\n';
+      const closeDelim='\r\n--'+boundary+'--';
+      const metadata={name:FILENAME,mimeType:'application/json',parents:[FOLDER_ID]};
+      const body=delim+'Content-Type: application/json; charset=UTF-8\r\n\r\n'+JSON.stringify(metadata)+
+        delim+'Content-Type: application/json\r\n\r\n'+JSON.stringify(data)+closeDelim;
+      const r2=await fetch('https://www.googleapis.com/upload/drive/v3/files?uploadType=multipart&supportsAllDrives=true',{
+        method:'POST',
+        headers:{Authorization:'Bearer '+tok,'Content-Type':'multipart/related; boundary='+boundary},
+        body
+      });
+      if(!r2.ok){const t2=await r2.text().catch(()=>'');throw new Error('Drive '+r2.status+(t2?': '+t2.slice(0,100):''));}
+      const novoArquivo=await r2.json();
+      driveFileId=novoArquivo.id;
+      return novoArquivo;
+    }
+    throw new Error('Drive '+r.status+(t?': '+t.slice(0,80):''));
+  }
   return r.json().catch(()=>({}));
 }
 
