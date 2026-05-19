@@ -768,21 +768,21 @@ async function driveReq(method,url,body){
 }
 async function buscarOuCriar(){
   const q=encodeURIComponent(`name='${FILENAME}' and '${FOLDER_ID}' in parents and trashed=false`);
-  const d=await driveReq('GET',`https://www.googleapis.com/drive/v3/files?q=${q}&fields=files(id)`);
+  const d=await driveReq('GET',`https://www.googleapis.com/drive/v3/files?q=${q}&fields=files(id,name,parents)&supportsAllDrives=true&includeItemsFromAllDrives=true`);
   if(d.files&&d.files.length){driveFileId=d.files[0].id;return;}
-  const c=await driveReq('POST','https://www.googleapis.com/drive/v3/files',{name:FILENAME,mimeType:'application/json',parents:[FOLDER_ID]});
+  const c=await driveReq('POST','https://www.googleapis.com/drive/v3/files?supportsAllDrives=true',{name:FILENAME,mimeType:'application/json',parents:[FOLDER_ID]});
   driveFileId=c.id;
 }
 async function lerArquivo(){
   const tok=await getAccessToken();
-  const r=await fetch(`https://www.googleapis.com/drive/v3/files/${driveFileId}?alt=media`,{headers:{Authorization:'Bearer '+tok}});
+  const r=await fetch(`https://www.googleapis.com/drive/v3/files/${driveFileId}?alt=media&supportsAllDrives=true`,{headers:{Authorization:'Bearer '+tok}});
   if(!r.ok) return null;
   const t=await r.text();if(!t.trim()) return null;
   try{return JSON.parse(t);}catch(e){return null;}
 }
 async function gravarArquivo(data){
   const tok=await getAccessToken();
-  const r=await fetch(`https://www.googleapis.com/upload/drive/v3/files/${driveFileId}?uploadType=media`,{method:'PATCH',headers:{Authorization:'Bearer '+tok,'Content-Type':'application/json'},body:JSON.stringify(data)});
+  const r=await fetch(`https://www.googleapis.com/upload/drive/v3/files/${driveFileId}?uploadType=media&supportsAllDrives=true`,{method:'PATCH',headers:{Authorization:'Bearer '+tok,'Content-Type':'application/json'},body:JSON.stringify(data)});
   if(!r.ok){const t=await r.text().catch(()=>'');throw new Error('Drive '+r.status+(t?': '+t.slice(0,80):''));}
   return r.json().catch(()=>({}));
 }
