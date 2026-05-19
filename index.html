@@ -503,6 +503,7 @@ main{position:relative;z-index:1}
     </div>
     <div class="meta-grid">
       <div class="field-wrap"><span class="field-label">Clínica</span><input id="f-clinica" type="text" placeholder="Nome da clínica"/></div>
+      <div class="field-wrap"><span class="field-label">Valor investido no mês (R$)</span><input id="f-investido" type="number" min="0" step="0.01" placeholder="0,00"/></div>
     </div>
     <!-- Campos hidden mantidos para compatibilidade com lógica existente -->
     <input id="f-mes" type="hidden"/>
@@ -532,13 +533,9 @@ main{position:relative;z-index:1}
         <div class="chart-leg" id="leg1"></div>
         <div class="chart-c" style="height:220px"><canvas id="ch1"></canvas></div>
       </div>
-      <div class="chart-cell">
+      <div class="chart-cell full">
         <div class="chart-cell-label">Faturamento semanal R$</div>
         <div class="chart-c" style="height:180px"><canvas id="ch2"></canvas></div>
-      </div>
-      <div class="chart-cell">
-        <div class="chart-cell-label">Distribuição por fonte</div>
-        <div class="chart-c" style="height:180px"><canvas id="ch3"></canvas></div>
       </div>
     </div>
   </div>
@@ -632,7 +629,34 @@ let configDesbloqueada=false;
 const FOLDER_ID='1H0XTFOjXo8JupBnPXZIg20BY9fehs5oC';
 const FILENAME='viotto_performance.json';
 const SERVICE_ACCOUNT='dashboard-app@viotto-dashboard-v2.iam.gserviceaccount.com';
-const PRIVATE_KEY=`-----BEGIN PRIVATE KEY-----\nMIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQC1td36+zUkpLcL\nfwrOXn60WYoWUcBl56PYrOY5j2Yy7a75aCo/vug7t2CH7jF9SVLaf37kvYRvgwK/\n/E1+oMj6gb4f1qOTdDXurvFLD0D5wy2ApNM7ZZ74bifgMhgckwzr2ljKBWhF+fow\nHvPr4oOfgtzqFwZ3Jwh994Yre/ea6fonwQFLrEF5M5KT5ojv1bkdBQ6TPTSVdP6n\nB4hHWmo9PthwCW431SZEYw53gzA4DL9C5wRe7oevdlganoIlmbkytxOmmgK61xkb\n7fgneJ3vV6biUxGRfdOi2CAWZ6o39VFGrB3ABEq9a9LP7jy93fvz56m3drYLkj+9\nqE29pB0FAgMBAAECggEALJdJNoZ/55KeMq2F5tesizBv4QNFzhwWipz/UD++6h+G\nsUCdIZCFJ+Zbw2+x6FdehC0GZDaXsc+6FIfjMoBdYZAGKoT/FjfN5lk68Fr5bHE3\nkNqh1XEeHkPV+EACx7xUTuqBoG3MRWPPQBDQdeHbwACamr10wjerb1IXNEOTIwn/\nEzvoTxGicp5dRb67RRgzB/M//v1fiBhCftexQSbn3OTsvGx4YeQKcFJJ0CiFHWeJ\nWWkEeqvU6CQYXTuWD3jv8riyAHvNWeDHasAeKKoRlLWWRMku9RYocduSJ4Oupcf6\nO3495Rsnh/RiRCpXpcZpUZOZPDVi/BVStV68CKUPUQKBgQDaBRxZJJrQJHVFQ2xg\n9s33PAi1Un51tduxRFBnMYk0SKCCxGOkDVzvW232ED3Xe8PVBB6pMdq90Kz8Hnfm\nhZnvE2eitP9AF/B7jY17nBMylVXZ6wE/ITq9Tvm4onS3/mFKa0dUCxPuNvKicj7T\n2Ab4Ezz3RYiEXYx3hiAY1gaS2QKBgQDVXXvsFS1i58WylyUM/JiuGTQP7l82vm3g\ncx2jnVsVaBUgxxQxCaXm0jcMkbwO4q81H76r/w/EnibccgIGG2UbvzQdUOyWyZx1\nBUyVJCQUkAmqGZNkXJ4U3vGDbWS3i0hurp/9C2V1nj+H26hsvXiavWr4/xCU55W5\nJcTAg8roDQKBgBMAfwgF+LhLdS0kQz3wRONXiCrFleAMialZmuhjmOHFsrezBjw2\nLfNutJbNs5YkY10djs6QWdBRb8JJpYmh+1irCE1WGSks7PjXzY0IfWPbQDBOGz21\nV7lIONuuzR18Pl6OGxloHcSVZXBjJLayDWlxw86JcOyYerWwKvv/K3OBAoGAWlTD\nvEWS+4aoml2HICJo+XxOIFiJEwI4Pog+CiD6iOuR1liyYbh19m0VRUsF1T9/cfxI\nm0TXBiT2yumxlahPfBnNFIRIReaBSMG/lHzCkboRfWRqlFjpzGg+06eitlpPhhyE\nO3txrwQaXYhPnAnzX3/GJDjIamJJbyNgUyj45JkCgYEAjDqWLJWSsxc+T5P9XIxQ\nlqrnibEvLWyR9MljQ/PfYOKPP732JNuxMDtcSeVceOlckSjLdE/6gism8fjifM5V\nSReuAMjivSqVqmu+iQLmuuaq0+iFYn3fmoHakrqGgGwrVjZFTfIWXWXUtsacyeap\nKGezTGC2ppao6PqDCAlOGY8=\n-----END PRIVATE KEY-----\n`;
+const PRIVATE_KEY=`-----BEGIN PRIVATE KEY-----
+MIIEvgIBADANBgkqhkiG9w0BAQEFAASCBKgwggSkAgEAAoIBAQDosIu6m3rQpqCG
+feG/cUZpRm4L/0xdSgN5yF42Fvqts2HVg6JZzjhQrtPPOFWMxdZikHHEinMB7ezJ
+tVaVkbjfULFi4ILI/eTLicukO3PDaVCnmF81jk+MtjGtKoSvIU18ErfIqXsmocaX
+VCwcImysm+N7iza4BhvIoLtfuuCcegbwmt8lQEeaJycmtnqU0xOnklLkqB9XlNdR
+QKWycC/NwU5UYR4kn0yiXM9IY7uPzIzyYDaaHTGDiSuna2MUJlQarkqIwGslRtrG
+hudLykzrSmYDxn4LTFyvPW5P4OFMuZsR9qAIUmuXLKm2JVgkMmo8WzIIJgB0m+Pn
+qpDNag4PAgMBAAECggEAR/pIlsY+lOleMYwh9zbCeZE0PFjSFe9tqM++uMud6npZ
+MpNf9piwWeDimzCJYhzWhrG4x3uuPLQM8Y47BNRJVCbhYD0jp6nGCuIKkLhlRFbB
+AL7FAMuPNu8q6a6D0aqjDdS6bgNjGV2kkS4T4PYTGMe19ALpv73//S0fGOs1TKFp
+kw+Sri7mhsch1m/HEp0HQxtNHzPf9gBYDPsie1TZ7lLqCAD6ybG6qgIhdO3vPzc5
+uV1YjEcEqcjD4/dfJ9SncTgF0CkQmEqmWwK9G+6SYIELabSoi0D90jbTfe86hO1I
+75422y/Nf4XhSmMVGwvYlYrod3KrE4QsoaDlHjEVKQKBgQD6+qqtJ397MLHRVcnw
+Sk4vsMnaJ9YSbniuVVWMWAehUaghovuaEdFoTMrzrn81PExyCj6IrpsCNTuuGlBu
+LjAjKZM4ricDlQ8sBHRch1eoQbGM+dqI23rsZP6ukI7HlgfNmteVJWpWV6hDJ6HB
+wm2LMzAMk6+564k5tIO/zObZBwKBgQDtWDaf5TJyhIY63gFM6HSdWMmrHEM2tE8H
+9tVQ+S6CSLEigNRPT8wJk88l4l9EH02bUbaB0lV57uZEdRPLiGwu6QsR2gHcE68X
+M6jbds8Wp2tzjrQh/el7NemKE0ZZyS8v65l6IiuqWTQ3LFvNnWrwjvluEuC8MArw
+5L6QNPkIuQKBgQDwPLja/g/cz4OmKUQfKkElDUhp9e/HvM7vsOcua6UCGbOiXuwP
+Ujbsa3VpRAKn5owWLRAmrVvbBTGXOcD7dmLFhapSewEFQM1BCRKI71RMznUxyIgS
+sGQ9m37dganqCgZ2HF13elULSOTbQzhmy8EnmVvI7iUrBfZYsh3anjvqSQKBgDX3
+1wPoo93yUGtWS8lnGg0lQUYNOSNZQJc5AyxUXMT3Ln//90bJiEWtPG8K2EqvK4Bj
+xjIi15jQP7/VN1kSfjb0erXmcoHOYAPQlVbB3zjxfLdb/Y21JMAFdEMXOunzmy00
+T0O8PV2QxxS8m2tXnhdxCzqCRGPGMNaxzLsRsIbRAoGBAMNGPWX3vT6U6JZbv7PN
+/gmPEaj4rWfEPwOpdMSj+so/gmNbLw4N3w96y6lnEt//s/kY1v/upeVs7+aBv/eQ
+vOg1P1CoUXOAerA5JEGJGiOZV66unqCncNFgJxdB4uCZ6I+oDqSTTL0kZ03I76Xn
+TQrf21d9LbuBOti433raMeDb
+-----END PRIVATE KEY-----`;
 
 const FONTES_PADRAO=[
   {id:'anuncio',label:'Megafone',icon:'📣',grupo:'WhatsApp',arquivada:false,vigenteDe:'',vigenteAte:''},
@@ -650,7 +674,8 @@ let CONFIG={
   fontes:JSON.parse(JSON.stringify(FONTES_PADRAO)),
   metas:{agend:10,comp:50,fech:30},
   faixasCPL:{bom:15,medio:30},  // bom até 15 / médio até 30 / ruim acima
-  faixasROI:{bom:5,medio:2}      // bom ≥ 5 / médio ≥ 2 / ruim < 2
+  faixasROI:{bom:5,medio:2},     // bom ≥ 5 / médio ≥ 2 / ruim < 2
+  investimentos:{}               // { '2026-01': 7127, ... } salvo no Drive
 };
 
 // FONTES e METAS apontam pra CONFIG (mantém compatibilidade com código existente)
@@ -659,7 +684,13 @@ let METAS=CONFIG.metas;
 const COLS=['msg','ag','co','fe','va'];
 const _k=['sk-ant-a','pi03-hZOzZ_lJC-UEiTn2QcePW_B36oG61jULwGrQDdXpqx7fainEBE0GxW9qrRreKMveBDLRypqeTFoEUlS0hd48AQ-FE0YFQAA'];
 const ANTHROPIC_KEY=_k.join('');
-const INVESTIMENTOS={'2026-01':7127,'2026-02':7444.78,'2026-03':7420,'2026-04':7256};
+// INVESTIMENTOS agora vem de CONFIG.investimentos (salvo no Drive).
+// Valores iniciais como fallback (sobrescritos pelos dados do Drive ao sincronizar).
+const INVESTIMENTOS_PADRAO={'2026-01':7127,'2026-02':7444.78,'2026-03':7420,'2026-04':7256};
+const INVESTIMENTOS=new Proxy({},{
+  get(_,k){return (CONFIG.investimentos&&CONFIG.investimentos[k])??INVESTIMENTOS_PADRAO[k]??0;},
+  set(_,k,v){if(!CONFIG.investimentos)CONFIG.investimentos={};CONFIG.investimentos[k]=v;return true;}
+});
 
 let meses={},driveFileId=null,accessToken=null,tokenExp=0;
 let curMes='',curTab=0,semData=makeSemData(),charts={};
@@ -807,7 +838,8 @@ async function sincronizar(){
     if(remote&&remote.config) CONFIG={...CONFIG,...remote.config,
       metas:{...CONFIG.metas,...(remote.config.metas||{})},
       faixasCPL:{...CONFIG.faixasCPL,...(remote.config.faixasCPL||{})},
-      faixasROI:{...CONFIG.faixasROI,...(remote.config.faixasROI||{})}
+      faixasROI:{...CONFIG.faixasROI,...(remote.config.faixasROI||{})},
+      investimentos:{...(remote.config.investimentos||{})}
     };
     aplicarConfig();
     salvarBackupConfig(); // backup do estado salvo no Drive (pra suportar Descartar)
@@ -978,6 +1010,12 @@ function carregarMes(key){
   document.getElementById('f-clinica').value=m.clinica||'';
   document.getElementById('f-mes').value=m.mes||key;
   document.getElementById('f-meta').value=m.meta||'';
+  // Carrega valor investido do mês (vem de CONFIG.investimentos via Proxy)
+  const elInv=document.getElementById('f-investido');
+  if(elInv){
+    const v=INVESTIMENTOS[key];
+    elInv.value=v?v:'';
+  }
   buildTabs();renderTab();renderMonthPills();
 }
 function novoMes(){
@@ -1089,6 +1127,7 @@ function renderResumo(c){
   kpi.innerHTML=`
     <div class="resumo-kpi-card"><div class="resumo-kpi-label">Mensagens</div><div class="resumo-kpi-val">${tm.toLocaleString('pt-BR')}</div><div class="resumo-kpi-sub">tx. agend. ${indSpan(cAg,(txAg!=null?txAg.toFixed(1)+'%':'—'))}</div></div>
     <div class="resumo-kpi-card"><div class="resumo-kpi-label">Agendamentos</div><div class="resumo-kpi-val">${ta}</div><div class="resumo-kpi-sub">tx. comp. ${indSpan(cCo,(txCo!=null?txCo.toFixed(1)+'%':'—'))}</div></div>
+    <div class="resumo-kpi-card"><div class="resumo-kpi-label">Comparecimentos</div><div class="resumo-kpi-val">${tc}</div><div class="resumo-kpi-sub">tx. fech. ${indSpan(cFe,(txFe!=null?txFe.toFixed(1)+'%':'—'))}</div></div>
     <div class="resumo-kpi-card"><div class="resumo-kpi-label">Fechamentos</div><div class="resumo-kpi-val">${tf}</div><div class="resumo-kpi-sub">tx. fech. ${indSpan(cFe,(txFe!=null?txFe.toFixed(1)+'%':'—'))}</div></div>
     ${inv?`<div class="resumo-kpi-card"><div class="resumo-kpi-label">Investido</div><div class="resumo-kpi-val" style="font-size:18px;color:var(--red)">${brl(inv)}</div><div class="resumo-kpi-sub">CPL: ${indSpan(cCpl,(cpl?brl(cpl):'—'))}</div></div>`:''}
     <div class="resumo-kpi-card"><div class="resumo-kpi-label">Faturado</div><div class="resumo-kpi-val" style="font-size:18px;color:var(--green)">${brl(tv)}</div><div class="resumo-kpi-sub">${pct!==null?pct+'% da meta':''}</div></div>
@@ -1130,6 +1169,13 @@ function salvarState(){
     });
   });
   semData[curTab].obs=document.getElementById('f-obs')?.value||'';
+  // Salva o valor investido em CONFIG (pra não perder ao trocar de aba sem clicar Salvar)
+  const elInv=document.getElementById('f-investido');
+  if(elInv&&curMes){
+    const v=parseFloat(elInv.value)||0;
+    if(v>0)INVESTIMENTOS[curMes]=v;
+    else if(CONFIG.investimentos&&CONFIG.investimentos[curMes]!==undefined)delete CONFIG.investimentos[curMes];
+  }
   // Recalcula Comp, Fech e Valor a partir dos leads
   recalcCompFechFromLeads();
 }
@@ -1308,6 +1354,13 @@ async function salvar(){
     meta:document.getElementById('f-meta').value||'',
     semanas:JSON.parse(JSON.stringify(semData))
   };
+  // Salva o valor investido do mês (vai pra CONFIG.investimentos via Proxy)
+  const elInv=document.getElementById('f-investido');
+  if(elInv){
+    const v=parseFloat(elInv.value)||0;
+    if(v>0)INVESTIMENTOS[curMes]=v;
+    else if(CONFIG.investimentos&&CONFIG.investimentos[curMes]!==undefined)delete CONFIG.investimentos[curMes];
+  }
   await salvarDrive();renderMonthPills();
 }
 function goTo(s){
@@ -1392,6 +1445,7 @@ function renderDash(){
   document.getElementById('kpi-grid').innerHTML=`
     <div class="kpi-card"><div class="kpi-label">Mensagens</div><div class="kpi-val">${tm.toLocaleString('pt-BR')}</div><div class="kpi-sub">agend. ${indSpan(cAg,(txAg!=null?txAg.toFixed(1)+'%':'—'))}</div></div>
     <div class="kpi-card"><div class="kpi-label">Agendamentos</div><div class="kpi-val">${ta}</div><div class="kpi-sub">comp. ${indSpan(cCo,(txCo!=null?txCo.toFixed(1)+'%':'—'))}</div></div>
+    <div class="kpi-card"><div class="kpi-label">Comparecimentos</div><div class="kpi-val">${tc}</div><div class="kpi-sub">fech. ${indSpan(cFe,(txFe!=null?txFe.toFixed(1)+'%':'—'))}</div></div>
     <div class="kpi-card"><div class="kpi-label">Fechamentos</div><div class="kpi-val">${tf}</div><div class="kpi-sub">conv. ${indSpan(cFe,(txFe!=null?txFe.toFixed(1)+'%':'—'))}</div></div>
     ${inv?`<div class="kpi-card"><div class="kpi-label">Investido / CPL</div><div class="kpi-val" style="font-size:20px;color:var(--red)">${brl(inv)}</div><div class="kpi-sub">CPL: ${indSpan(cCpl,(cpl?brl(cpl):'—'))}</div></div>`:''}
     <div class="kpi-card"><div class="kpi-label">Faturado</div><div class="kpi-val" style="font-size:22px;color:var(--green)">R$&nbsp;${tv.toLocaleString('pt-BR')}</div><div class="kpi-sub">${pct!==null?pct+'% da meta':''}</div>${pct!==null?`<div class="progress-track"><div class="progress-fill" style="width:${Math.min(pct,100)}%"></div></div>`:''}</div>
@@ -1425,7 +1479,6 @@ function renderDash(){
   dc('ch1');charts['ch1']=new Chart(document.getElementById('ch1'),{type:'bar',data:{labels:labs,datasets:[{label:'Msgs',data:dataMsg,backgroundColor:'rgba(86,156,214,0.75)',borderRadius:3},{label:'Agend.',data:dataAg,backgroundColor:'rgba(242,201,76,0.85)',borderRadius:3},{label:'Comp.',data:dataCo,backgroundColor:'rgba(155,89,182,0.85)',borderRadius:3},{label:'Fech.',data:dataFe,backgroundColor:'rgba(111,207,151,0.95)',borderRadius:3}]},options:{...CO}});
   document.getElementById('leg1').innerHTML=[{c:'rgba(86,156,214,0.75)',l:'Mensagens'},{c:'rgba(242,201,76,0.85)',l:'Agendamentos'},{c:'rgba(155,89,182,0.85)',l:'Comparecimentos'},{c:'rgba(111,207,151,0.95)',l:'Fechamentos'}].map(x=>`<span class="chart-leg-i"><span style="width:10px;height:10px;border-radius:2px;background:${x.c};display:inline-block"></span>${x.l}</span>`).join('');
   dc('ch2');charts['ch2']=new Chart(document.getElementById('ch2'),{type:'bar',data:{labels:labs,datasets:[{label:'R$',data:dataVa,backgroundColor:'rgba(111,207,151,0.85)',borderColor:'#6FCF97',borderWidth:1,borderRadius:3}]},options:{...CO,scales:{x:CO.scales.x,y:{...CO.scales.y,ticks:{...CO.scales.y.ticks,callback:v=>'R$'+(v>=1000?(v/1000).toFixed(0)+'k':v)}}}}});
-  dc('ch3');charts['ch3']=new Chart(document.getElementById('ch3'),{type:'doughnut',data:{labels:FONTES.map(f=>f.label),datasets:[{data:FONTES.map(f=>fonteAggr[f.id]),backgroundColor:['#6FCF97','#56A0D3','#F2C94C','#9B59B6','#E67E22','#EB5757'],borderColor:'#111',borderWidth:2}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{position:'right',labels:{color:'rgba(250,250,248,0.7)',font:{size:10,family:'Montserrat'},boxWidth:10,padding:12}}}}});
 }
 
 // === CONFIGURAÇÕES ===
