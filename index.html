@@ -104,6 +104,11 @@
   <script>
     const storeKey = "viotto-salvador-gerifit-design-v1";
     const themeKey = `${storeKey}-theme`;
+    const cloudUrl = "https://script.google.com/macros/s/AKfycbwCQa5DzNWcO0imkRwVxnZSJzj0bFmAJfb73Ujgt4HneS3U9FhGYDDwLhIk6nG2g8J-mA/exec";
+    const cloudToken = "viotto2026";
+    let cloudReady = false;
+    let cloudSaving = false;
+    let cloudSaveTimer = null;
     const seed = {
   dataVersion: "2026-06-02-drive-sync-v1",
   active: "2026-06",
@@ -3546,8 +3551,50 @@
     function load(){try{const stored=migrateJuneWeek4ToWeek1(JSON.parse(localStorage.getItem(storeKey)));if(stored?.dataVersion!==seed.dataVersion){const fresh=preserveMeetingNotes(structuredClone(seed),stored||{});localStorage.setItem(storeKey,JSON.stringify(fresh));return fresh}const data=migrateJuneWeek4ToWeek1(merge(stored||seed));const existing=new Set((data.leads||[]).map(l=>l.id));for(const l of seed.leads||[])if(!existing.has(l.id))data.leads.push(l);if(!(data.leads||[]).length)data.leads=legacyLeadsFrom(data);localStorage.setItem(storeKey,JSON.stringify(data));return data}catch{const data=structuredClone(seed);if(!(data.leads||[]).length)data.leads=legacyLeadsFrom(data);return data}}
     function mergeSources(baseSources=[]){const byId=new Map(seed.config.sources.map(s=>[s.id,s]));for(const s of baseSources)byId.set(s.id,{...(byId.get(s.id)||{}),...s});return [...byId.values()]}
     function merge(base){base=base||{};return {...structuredClone(seed),...base,months:{...seed.months,...(base.months||{})},investment:{...seed.investment,...(base.investment||{})},config:{...seed.config,...base.config,goals:{...seed.config.goals,...base.config?.goals},cpl:{...seed.config.cpl,...base.config?.cpl},roi:{...seed.config.roi,...base.config?.roi},sources:mergeSources(base.config?.sources||[])},leads:[...(base.leads||[])]}}
-    function persist(){localStorage.setItem(storeKey,JSON.stringify(state))}
-    function save(){persist();toast("Dados salvos")}
+    function persist(syncCloud=true){localStorage.setItem(storeKey,JSON.stringify(state));if(syncCloud)queueCloudSave()}
+    function save(){persist();toast(cloudSaving?"Salvando no Drive...":"Dados salvos")}
+    function cloudStatus(msg){const btn=$("#saveBtn");if(btn)btn.textContent=msg}
+    function hasCloudData(data){return data&&Object.keys(data).length>0&&(data.months||data.leads||data.investment||data.config)}
+    async function loadCloud(){
+      cloudStatus("Sincronizando...");
+      try{
+        const res=await fetch(`${cloudUrl}?token=${encodeURIComponent(cloudToken)}&v=${Date.now()}`,{cache:"no-store"});
+        const json=await res.json();
+        if(!json.ok)throw new Error(json.error||"Erro no Apps Script");
+        if(hasCloudData(json.data)){
+          state=migrateJuneWeek4ToWeek1(merge(json.data));
+          persist(false);
+          renderAll();
+          showView(document.querySelector(".view.active")?.id||"dashboard");
+          toast("Dados carregados do Drive");
+        }else{
+          queueCloudSave(100);
+          toast("Drive conectado");
+        }
+        cloudReady=true;
+        cloudStatus("Salvar alterações");
+      }catch(err){
+        console.warn("Falha ao carregar Drive",err);
+        cloudStatus("Salvar local");
+        toast("Drive offline: usando backup local");
+      }
+    }
+    function queueCloudSave(delay=900){clearTimeout(cloudSaveTimer);cloudSaveTimer=setTimeout(saveCloud,delay)}
+    async function saveCloud(){
+      cloudSaving=true;
+      cloudStatus("Salvando...");
+      try{
+        await fetch(`${cloudUrl}?token=${encodeURIComponent(cloudToken)}`,{method:"POST",mode:"no-cors",headers:{"Content-Type":"text/plain;charset=utf-8"},body:JSON.stringify({data:state,savedAt:new Date().toISOString()})});
+        cloudStatus("Salvo no Drive");
+        setTimeout(()=>cloudStatus("Salvar alterações"),1200);
+      }catch(err){
+        console.warn("Falha ao salvar Drive",err);
+        cloudStatus("Salvar local");
+        toast("Salvo localmente. Drive não respondeu.");
+      }finally{
+        cloudSaving=false;
+      }
+    }
     function toast(msg){const t=$("#toast");t.textContent=msg;t.classList.add("show");setTimeout(()=>t.classList.remove("show"),1800)}
     function money(v){return Number(v||0).toLocaleString("pt-BR",{style:"currency",currency:"BRL"})}
     function labelMonth(k){const [y,m]=k.split("-");return `${["Jan","Fev","Mar","Abr","Mai","Jun","Jul","Ago","Set","Out","Nov","Dez"][+m-1]}/${y}`}
@@ -3695,7 +3742,7 @@
     $("#addSource").onclick=()=>{state.config.sources.push({id:"fonte_"+Date.now().toString(36),name:"Nova fonte",icon:"",group:"Outros"});persist();renderAll()};
     ["goalSchedule","goalShow","goalClose","cplGood","cplMed","roiGood","roiMed"].forEach(id=>$("#"+id).oninput=()=>{state.config.goals.schedule=+$("#goalSchedule").value||10;state.config.goals.show=+$("#goalShow").value||50;state.config.goals.close=+$("#goalClose").value||30;state.config.cpl.good=+$("#cplGood").value||15;state.config.cpl.med=+$("#cplMed").value||30;state.config.roi.good=+$("#roiGood").value||5;state.config.roi.med=+$("#roiMed").value||2;persist();renderKpis();renderHistory()});
     $("#saveBtn").onclick=save; $("#openCommercial").onclick=()=>showView("dados"); $("#printPage").onclick=()=>window.print(); $("#themeToggle").onclick=toggleTheme;
-    applyTheme(); renderAll(); showView("dashboard");
+    applyTheme(); renderAll(); showView("dashboard"); loadCloud();
   </script>
 </body>
 </html>
